@@ -76,7 +76,7 @@ mp.events.add("server:inventory:prepareKleidung", (player) => {
         businessData = JSON.parse(businessData);
         var duty = "N";
         if (fractionData.playerFractionDuty == "Y" || businessData.playerBusinessDuty == "Y") duty = "Y";
-        gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+        gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
             if (err2) console.log("Error in setModel + Clothes on Login");
             else if (res2.length > 0) {
                 res2.forEach(function(modelData) {
@@ -576,7 +576,7 @@ mp.events.add("server:inventory:giveItem", (player, itemId) => {
 
 mp.events.add("server:inventory:useItem", (player, itemId) => {
     if (mp.players.exists(player)) {
-        gm.databaseManager.getConnection().query("SELECT u.*, i.type, i.usable, i.fillvalue, o.time, o.objectName, o.type AS objType FROM user_items u LEFT JOIN items i ON i.id = u.itemId LEFT JOIN itemObject o ON o.itemId = i.id WHERE u.charId = ? AND u.id = ?", [player.data.internalId, itemId], function(err, res) {
+        gm.databaseManager.getConnection().query("SELECT u.*, i.type, i.usable, i.fillvalue, o.time, o.objectName, o.type AS objType FROM user_items u LEFT JOIN items i ON i.id = u.itemId LEFT JOIN itemobject o ON o.itemId = i.id WHERE u.charId = ? AND u.id = ?", [player.data.internalId, itemId], function(err, res) {
             if (err) console.log("Error in useItem Query 1: " + err);
             else {
                 if (res.length > 0) {

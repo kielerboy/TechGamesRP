@@ -424,7 +424,7 @@ mp.events.add("openGarage", (player, id) => {
             // Fahrzeuge aus Datenbank holen und Garagenmenu öffnen - TODO: DB Abfrage
         gm.databaseManager.getConnection().query("SELECT * FROM garages WHERE actionId = ?", [id], function (err, res) {
             if (err) console.log(err);
-            gm.databaseManager.getConnection().query("SELECT DISTINCT vehicles.* FROM vehicles LEFT JOIN vehicleKeys ON vehicleKeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehicleKeys.keyOwner = ? AND vehicleKeys.isActive = 'Y') AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.garage = ? ORDER BY vehicles.numberplate", [player.data.internalId, player.data.internalId, garagenId], function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT DISTINCT vehicles.* FROM vehicles LEFT JOIN vehiclekeys ON vehiclekeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehiclekeys.keyOwner = ? AND vehiclekeys.isActive = 'Y') AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.garage = ? ORDER BY vehicles.numberplate", [player.data.internalId, player.data.internalId, garagenId], function (err, res) {
                 if (err) console.log(err);
                 if (res.length > 0){
                     let VehList = [];
@@ -511,9 +511,9 @@ function spawnVeh(player, numplate) {
             player.notify("~r~Es steht bereits ein Fahrzeug in der Ausfahrt");
             return;
         }
-                    //"SELECT vehicles.*, vehicleKeys.* FROM vehicles LEFT JOIN vehicleKeys ON vehicleKeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehicleKeys.keyOwner = ?) AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.garage = ? ORDER BY vehicles.numberplate"
+                    //"SELECT vehicles.*, vehiclekeys.* FROM vehicles LEFT JOIN vehiclekeys ON vehiclekeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehiclekeys.keyOwner = ?) AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.garage = ? ORDER BY vehicles.numberplate"
         //gm.databaseManager.getConnection().query("SELECT * FROM vehicles WHERE owner = ? AND isSpawned = 'N' AND numberplate = ?", [player.data.internalId, numplate], function (err, res) {
-        gm.databaseManager.getConnection().query("SELECT DISTINCT vehicles.*, vehicleKeys.keyOwner FROM vehicles LEFT JOIN vehicleKeys ON vehicleKeys.vehID = vehicles.id WHERE (vehicles.`owner` = ? OR vehicleKeys.keyOwner = ? AND vehicleKeys.isActive = 'Y') AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.numberplate = ?", [player.data.internalId, player.data.internalId, numplate], function (err, res) {
+        gm.databaseManager.getConnection().query("SELECT DISTINCT vehicles.*, vehiclekeys.keyOwner FROM vehicles LEFT JOIN vehiclekeys ON vehiclekeys.vehID = vehicles.id WHERE (vehicles.`owner` = ? OR vehiclekeys.keyOwner = ? AND vehiclekeys.isActive = 'Y') AND vehicles.isSpawned = 'N' AND vehicles.isImpounded = 'N' AND vehicles.numberplate = ?", [player.data.internalId, player.data.internalId, numplate], function (err, res) {
             if (err) console.log(err);
             if (res.length > 0){
               if(mp.players.exists(player)) {
@@ -636,7 +636,7 @@ function destroyVeh(player) {
             return;
         }
 
-        gm.databaseManager.getConnection().query("SELECT vehicles.*, vehicleKeys.keyOwner FROM vehicles LEFT JOIN vehicleKeys ON vehicleKeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehicleKeys.keyOwner = ? AND vehicleKeys.isActive = 'Y') AND vehicles.isSpawned = 'Y' AND vehicles.isImpounded = 'N' AND vehicles.numberplate = ?", [player.data.internalId, player.data.internalId, veh.numberPlate], function (err, res) {
+        gm.databaseManager.getConnection().query("SELECT vehicles.*, vehiclekeys.keyOwner FROM vehicles LEFT JOIN vehiclekeys ON vehiclekeys.vehID = vehicles.id WHERE (vehicles.owner = ? OR vehiclekeys.keyOwner = ? AND vehiclekeys.isActive = 'Y') AND vehicles.isSpawned = 'Y' AND vehicles.isImpounded = 'N' AND vehicles.numberplate = ?", [player.data.internalId, player.data.internalId, veh.numberPlate], function (err, res) {
             if(err) console.log(err);
 
             player.notify("Count: "+res.length);

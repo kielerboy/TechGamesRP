@@ -197,7 +197,7 @@ mp.events.add({
 
                     //Set Fraction to Player..
                     player.data.fractionData = JSON.stringify("arbeitslos");
-                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy, u.clothes FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy, u.clothes FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
                         if (err2) console.log("Error on Set Fraction");
 
                         if (res2.length > 0) {
@@ -210,7 +210,7 @@ mp.events.add({
 
                     //Set Business to Player
                     player.data.businessData = JSON.stringify("arbeitslos");
-                    gm.databaseManager.getConnection().query("SELECT f.businessName, f.businessID, r.id AS businessRankID, r.businessRankName, r.businessRank, r.canBill, r.canInvite, r.payCheck, u.playerBusinessDuty FROM businessUsers u LEFT JOIN businessRanks r ON r.id = u.businessRankID LEFT JOIN business f ON f.businessID = u.businessID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.businessName, f.businessID, r.id AS businessRankID, r.businessRankName, r.businessRank, r.canBill, r.canInvite, r.payCheck, u.playerBusinessDuty FROM businessusers u LEFT JOIN businessranks r ON r.id = u.businessRankID LEFT JOIN business f ON f.businessID = u.businessID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
                         if (err2) console.log("Error on Set Business");
 
                         if (res2.length > 0) {
@@ -252,7 +252,7 @@ mp.events.add({
                         return color;
                     };
                     if (player.isPet !== 1) {
-                        gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+                        gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
                             if (err2) console.log("Error in setModel + Clothes on Login");
 
 
@@ -371,7 +371,7 @@ mp.events.add("initEinreise", (player) => {
     mp.events.call("server:ClothesMenu:save", player);
     try {
         if (mp.players.exists(player)) {
-            gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+            gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
                 if (err2) console.log("Error in unnötiges nötiges Camera Destroy Event Clothes + Model");
 
                 if (res2.length > 0) {
@@ -445,7 +445,7 @@ mp.events.add("initEinreise", (player) => {
 
 mp.events.add("unnötigesCameraDestroyEvent", (player) => {
     if (player.isPet !== 1) {
-        gm.databaseManager.getConnection().query("SELECT appearance, data, feature FROM characterModel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+        gm.databaseManager.getConnection().query("SELECT appearance, data, feature FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
             if (err2) console.log("Error in unnötiges nötiges Camera Destroy Event Clothes + Model");
 
             if (res2.length > 0) {
@@ -517,7 +517,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
     } else {
         player.model = mp.joaat(player.petHash);
     }
-    gm.databaseManager.getConnection().query("SELECT * FROM vehicleKeys WHERE keyOwner = ?", [player.data.internalId], function(err5, res5) {
+    gm.databaseManager.getConnection().query("SELECT * FROM vehiclekeys WHERE keyOwner = ?", [player.data.internalId], function(err5, res5) {
         if (err5) console.log("Error in Select Vehicle Keys on Login");
         let vehKeysList = [];
         res5.forEach(function(vehKeys) {

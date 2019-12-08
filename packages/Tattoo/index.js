@@ -6535,7 +6535,7 @@ mp.events.add("server:tattoo:save", (player) => {
                                     newList = JSON.stringify(newList);
                                     player.setVariable("tattoos", newList);
 
-                                    gm.databaseManager.getConnection().query("UPDATE characterModel SET feature = ? WHERE internalId = ?", [newList, player.data.internalId], function(err4, res4) {
+                                    gm.databaseManager.getConnection().query("UPDATE charactermodel SET feature = ? WHERE internalId = ?", [newList, player.data.internalId], function(err4, res4) {
                                         if (err4) console.log("Error in save Tattoos Query: " + err4);
                                         player.call(`notification`, ["2", "Du hast dass Tattoo gestochen"]);
                                     });

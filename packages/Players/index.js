@@ -367,7 +367,7 @@ if(mp.players.exists(player)) {
 
 
 mp.events.add("server:duty:openMenu", (player) => {
-  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err, res) {
+  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err, res) {
     if (res.length > 0) {
         var i = 1;
   			let fractionList = [];
@@ -384,7 +384,7 @@ mp.events.add("server:duty:openMenu", (player) => {
 });
 
 mp.events.add("server:arbeitsver:openMenu", (player) => {
-  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err, res) {
+  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err, res) {
     if (res.length > 0) {
         var i = 1;
   			let fractionList = [];
@@ -402,7 +402,7 @@ mp.events.add("server:arbeitsver:openMenu", (player) => {
 
 mp.events.add("server:player:loadModel", (player) => {
   if (mp.players.exists(player)){
-    gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
+    gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
         if (err2) console.log("Error in unnötiges nötiges Camera Destroy Event Clothes + Model");
 
         if (res2.length > 0) {

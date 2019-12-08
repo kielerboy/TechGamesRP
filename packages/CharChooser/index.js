@@ -42,7 +42,7 @@ mp.events.add("createCharacter", (player, data) => {
             player.setClothes(11, 16, 0, 0); //Top
         }
 
-        gm.databaseManager.getConnection().query("UPDATE characterModel SET data =? WHERE internalId='" + player.data.internalId + "'", [data], function (err, res) {
+        gm.databaseManager.getConnection().query("UPDATE charactermodel SET data =? WHERE internalId='" + player.data.internalId + "'", [data], function (err, res) {
             if (err) throw err;
         })
         player.dimension = 0;

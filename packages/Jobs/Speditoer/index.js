@@ -20,7 +20,7 @@ mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
   function unterschreiben(player) {
     if(mp.players.exists(player)){
       player.notify("nach if vor DB");
-        gm.databaseManager.getConnection().query("INSERT INTO jobUsers(charID,jobid) VALUES(?,1)", [player.data.internalId], function(err, res) {
+        gm.databaseManager.getConnection().query("INSERT INTO jobusers(charID,jobid) VALUES(?,1)", [player.data.internalId], function(err, res) {
         if (err2) console.log("Error in adding Job Player "+err);
           else {
              player.notify("Du hast den Job als Spediteur angenommen!");
@@ -36,7 +36,7 @@ mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
         function kündigen(player) {
           if(mp.players.exists(player)){
             player.notify("nach if vor DB");
-              gm.databaseManager.getConnection().query("DELETE FROM jobUsers WHERE jobid = 1 AND charID = ?", [player.data.internalId], function(err2, res2) {
+              gm.databaseManager.getConnection().query("DELETE FROM jobusers WHERE jobid = 1 AND charID = ?", [player.data.internalId], function(err2, res2) {
               if (err2) console.log("Error in adding Job Player "+err2);
                 else {
                    player.notify("Du hast den Job als Spediteur gekündigt!");
@@ -50,7 +50,7 @@ mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
 
              mp.events.add("server:spediteur:startJob", (player) => {
               if(mp.players.exists(player)){
-                gm.databaseManager.getConnection().query("SELECT charID FROM `jobUsers` WHERE jobid = ?", [player.data.internalId], function (err3, res) {
+                gm.databaseManager.getConnection().query("SELECT charID FROM `jobusers` WHERE jobid = ?", [player.data.internalId], function (err3, res) {
                   if (err2) console.log("Error in SELECT JobID "+err3)
 
                    else if (res.length = 1){

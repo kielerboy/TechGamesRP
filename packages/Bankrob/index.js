@@ -39,7 +39,7 @@ mp.events.add("server:Keybind:KeyE", (player) => {
 
 mp.events.add("server:bankrob:door1",(player) => {     
     if (mp.players.exists(player)) {
-        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
             if (err) console.log("Error in Count Duty Officers: "+err);
             if (res[0].counter >= 1) {               
                 player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -60,7 +60,7 @@ mp.events.add("server:bankrob:door1",(player) => {
 
 mp.events.add("server:bankrob:door2",(player) => {     
     if (mp.players.exists(player)) {
-        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
             if (err) console.log("Error in Count Duty Officers: "+err);
             if (res[0].counter >= 1) {               
                 player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -84,7 +84,7 @@ mp.events.add("server:bank:tresor1",(player) => {
     if (mp.players.exists(player)) {        
         console.log(lastTresor1);
         if (Date.now() > lastTresor1 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -119,7 +119,7 @@ var lastTresor2 = 0;
 mp.events.add("server:bank:tresor2",(player) => {        
     if (mp.players.exists(player)) {        
         if (Date.now() > lastTresor2 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -154,7 +154,7 @@ var lastTresor3 = 0;
 mp.events.add("server:bank:tresor3",(player) => {        
     if (mp.players.exists(player)) {        
         if (Date.now() > lastTresor3 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -189,7 +189,7 @@ var lastTresor4 = 0;
 mp.events.add("server:bank:tresor4",(player) => {        
     if (mp.players.exists(player)) {        
         if (Date.now() > lastTresor4 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -224,7 +224,7 @@ var lastTresor5 = 0;
 mp.events.add("server:bank:tresor5",(player) => {        
     if (mp.players.exists(player)) {
         if (Date.now() > lastTresor5 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   
@@ -259,7 +259,7 @@ var lastTresor6 = 0;
 mp.events.add("server:bank:tresor6",(player) => {        
     if (mp.players.exists(player)) {        
         if (Date.now() > lastTresor6 + 600000) {
-            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+            gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
                 if (err) console.log("Error in Count Duty Officers: "+err);
                 if (res[0].counter >= 1) {               
                     player.playAnimation('oddjobs@taxi@gyn@', 'idle_b_ped', 1, 33);   

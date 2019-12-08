@@ -3,9 +3,9 @@ let BarberShape = mp.colshapes.newSphere(-30.46, -151.82, 57.07, 3, 0);
 mp.events.add("server:Keybind:KeyE", (player) => {
   if (mp.players.exists(player)) {
     if(BarberShape.isPointWithin(player.position)) {
-      gm.databaseManager.getConnection().query("SELECT data FROM characterModel WHERE internalId='" + player.data.internalId + "'", function (err, res) {
+      gm.databaseManager.getConnection().query("SELECT data FROM charactermodel WHERE internalId='" + player.data.internalId + "'", function (err, res) {
         if (err){
-          console.log("BARBER: Fehler beim Laden der characterModel.data aus Datenbank");
+          console.log("BARBER: Fehler beim Laden der charactermodel.data aus Datenbank");
           return;
         } else if (res.length > 0){
           let data = JSON.parse(res[0].data);
@@ -24,9 +24,9 @@ mp.events.add("server:Barber:SetHair", (player, hairID) => {
 
 mp.events.add("server:Barber:save", (player, hairID, colorID, highlightID, money) => {
   if (mp.players.exists(player)) {
-    gm.databaseManager.getConnection().query("SELECT data FROM characterModel WHERE internalId='" + player.data.internalId + "'", function (err, res) {
+    gm.databaseManager.getConnection().query("SELECT data FROM charactermodel WHERE internalId='" + player.data.internalId + "'", function (err, res) {
       if (err){
-        console.log("BARBER: Fehler beim Laden der characterModel.data aus Datenbank");
+        console.log("BARBER: Fehler beim Laden der charactermodel.data aus Datenbank");
         return;
       } else if (res.length > 0){
         data = JSON.parse(res[0].data);
@@ -34,9 +34,9 @@ mp.events.add("server:Barber:save", (player, hairID, colorID, highlightID, money
         data.Hair[1] = colorID;
         data.Hair[2] = highlightID;
         dataToSave = JSON.stringify(data);
-        gm.databaseManager.getConnection().query("UPDATE characterModel SET data =? WHERE internalId='" + player.data.internalId + "'", [dataToSave], function (err, res) {
+        gm.databaseManager.getConnection().query("UPDATE charactermodel SET data =? WHERE internalId='" + player.data.internalId + "'", [dataToSave], function (err, res) {
           if (err){
-            console.log("BARBER: Fehler beim Speichern der characterModel.data in Datenbank");
+            console.log("BARBER: Fehler beim Speichern der charactermodel.data in Datenbank");
             return;
           } else {
             player.data.money = money;

@@ -21,7 +21,7 @@ mp.events.add("server:Keybind:KeyO", (player) => {
     fractionData = JSON.parse(fractionData);
 
     if (fractionData.playerFractionDuty == "Y" && fractionData.fractionName == "Department of Justice") {
-        gm.databaseManager.getConnection().query("SELECT r.fractionRankName FROM fractions f LEFT JOIN fractionRanks r ON f.fractionID = r.fractionID WHERE f.fractionID = 5", function (errUp, resUp) {
+        gm.databaseManager.getConnection().query("SELECT r.fractionRankName FROM fractions f LEFT JOIN fractionranks r ON f.fractionID = r.fractionID WHERE f.fractionID = 5", function (errUp, resUp) {
             if (errUp) player.notify("Error: " + errUp);
             if (resUp.length > 0) {
                 var c = 1;
@@ -56,10 +56,10 @@ mp.events.add("server:fractions:reDuty", (player) => {
 mp.events.add("server:doj:onDuty", (player) => {
   if(mp.players.exists(player)) {
     player.notify("Du hast den Dienst angetreten");
-    gm.databaseManager.getConnection().query("UPDATE fractionUsers SET playerFractionDuty = 'Y' WHERE playerCharID = " + player.data.internalId, function (errUp, resUp) {
+    gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionDuty = 'Y' WHERE playerCharID = " + player.data.internalId, function (errUp, resUp) {
         if (errUp) console.log("Error: " + errUp);
 
-        gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [player.data.internalId], function (err2, res2) {
+        gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [player.data.internalId], function (err2, res2) {
             if (err2) console.log("Error on Set Fraction");
 
             player.data.fractionData = JSON.stringify("arbeitslos");
@@ -83,7 +83,7 @@ mp.events.add("server:doj:offDuty", (player) => {
     player.setClothes(9,0,0,2);
     player.armour = 0;
 
-    gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
+    gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
         if (err2) console.log("Error in setModel + Clothes on Login");
 
         if (res2.length > 0) {
@@ -93,10 +93,10 @@ mp.events.add("server:doj:offDuty", (player) => {
 
                 mp.events.call("server:ClothesMenu:load", player, appearance);
 
-                gm.databaseManager.getConnection().query("UPDATE fractionUsers SET playerFractionDuty = 'N' WHERE playerCharID = " + player.data.internalId, function (errUp, resUp) {
+                gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionDuty = 'N' WHERE playerCharID = " + player.data.internalId, function (errUp, resUp) {
                     if (errUp) console.log("Error: " + errUp);
 
-                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [player.data.internalId], function (err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [player.data.internalId], function (err2, res2) {
                         if (err2) console.log("Error on Set Fraction");
 
                         player.data.fractionData = JSON.stringify("arbeitslos");
@@ -119,18 +119,18 @@ function hirePlayer(player, rank) {
     getNearestPlayer(player, 2);
     if(mp.players.exists(currentTarget)) {
       if(currentTarget){
-          gm.databaseManager.getConnection().query("SELECT id FROM fractionRanks WHERE fractionID = 5 AND fractionRankName = ?", [rank], function (err1, res1) {
+          gm.databaseManager.getConnection().query("SELECT id FROM fractionranks WHERE fractionID = 5 AND fractionRankName = ?", [rank], function (err1, res1) {
               if (err1) console.log("Error in DOJ Hire Player Query1: "+err1);
               if (res1.length == 1) {
                   res1.forEach(function(rankID) {
                       var id = rankID.id;
                       var targetId = parseInt(currentTarget.data.internalId);
-                      gm.databaseManager.getConnection().query("INSERT INTO fractionUsers(playerCharID,fractionID,fractionRankID,playerFractionDuty) VALUES(?,5,?,'N')", [targetId, id], function(err2, res2) {
+                      gm.databaseManager.getConnection().query("INSERT INTO fractionusers(playerCharID,fractionID,fractionRankID,playerFractionDuty) VALUES(?,5,?,'N')", [targetId, id], function(err2, res2) {
                           if (err2) console.log("Error in DOJ Hire Player Query2: "+err2);
                           else {
                               player.notify("Die Person wurde erfolgreich eingestellt!");
                               currentTarget.notify("Du wurdest beim DOJ als "+rank+" eingestellt!");
-                              gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
+                              gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
                                   if (err2) console.log("Error on Set Fraction");
 
                                   if (res2.length > 0) {
@@ -156,12 +156,12 @@ function firePlayer(player) {
     if(mp.players.exists(currentTarget)) {
       if(currentTarget){
           var targetId = currentTarget.data.internalId;
-          gm.databaseManager.getConnection().query("DELETE FROM fractionUsers WHERE fractionID = 5 AND playerCharID = ?", [targetId], function (err1, res1) {
+          gm.databaseManager.getConnection().query("DELETE FROM fractionusers WHERE fractionID = 5 AND playerCharID = ?", [targetId], function (err1, res1) {
               if (err1) console.log("Error in DOJ Fire Player Query1: "+err1);
               else {
                   player.notify("Die Person wurde erfolgreich gefeuert!");
                   currentTarget.notify("Du wurdest aus dem DOJ entlassen!");
-                  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
+                  gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
                       if (err2) console.log("Error on Set Fraction");
 
                       currentTarget.data.fractionData = JSON.stringify("arbeitslos");
@@ -185,18 +185,18 @@ function canBuy(player) {
     if(mp.players.exists(currentTarget)) {
       if (currentTarget) {
         var targetId = currentTarget.data.internalId;
-        gm.databaseManager.getConnection().query("SELECT fractionID FROM fractionUsers WHERE playerCharID = ?", [targetId], function(err1, res1){
+        gm.databaseManager.getConnection().query("SELECT fractionID FROM fractionusers WHERE playerCharID = ?", [targetId], function(err1, res1){
           if (err1) console.log("Error in DB Query Check Fraction")
             if (res1.length > 0) {
               res1.forEach(function(fraction) {
                 if(fraction.fractionID == 5) {
-                  gm.databaseManager.getConnection().query("UPDATE fractionUsers SET playerFractionCanBuy = 'Y' WHERE playerCharID = ?", [targetId], function(err2, res2){
+                  gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionCanBuy = 'Y' WHERE playerCharID = ?", [targetId], function(err2, res2){
                     if (err2) console.log("Error in DB Query canBuy "+err2);
                     else {
                       player.notify("Die Person hat nun eine Berechtigung");
                       currentTarget.notify("Du hast nun eine Shop Berechtigung");
                       var targetId = currentTarget.data.internalId;
-                      gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
+                      gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
                         if (err2) console.log("Error on Set Fraction");
 
                         currentTarget.data.fractionData = JSON.stringify("arbeitslos");
@@ -228,18 +228,18 @@ function dontcanBuy(player) {
     if(mp.players.exists(currentTarget)) {
       if (currentTarget) {
         var targetId = currentTarget.data.internalId;
-        gm.databaseManager.getConnection().query("SELECT fractionID FROM fractionUsers WHERE playerCharID = ?", [targetId], function(err1, res1){
+        gm.databaseManager.getConnection().query("SELECT fractionID FROM fractionusers WHERE playerCharID = ?", [targetId], function(err1, res1){
           if (err1) console.log("Error in DB Query Check Fraction")
           if (res1.length > 0) {
             res1.forEach(function(fraction) {
               if(fraction.fractionID == 5) {
-                gm.databaseManager.getConnection().query("UPDATE fractionUsers SET playerFractionCanBuy = 'N' WHERE playerCharID = ?", [targetId], function(err2, res2){
+                gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionCanBuy = 'N' WHERE playerCharID = ?", [targetId], function(err2, res2){
                   if (err2) console.log("Error in DB Query canBuy "+err2);
                   else {
                     player.notify("Die Person hat nun keine Berechtigung mehr!");
                     currentTarget.notify("Du hast nun keine Shop Berechtigung mehr!");
                     var targetId = currentTarget.data.internalId;
-                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionUsers u LEFT JOIN fractionRanks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharID = ?", [targetId], function (err2, res2) {
                       if (err2) console.log("Error on Set Fraction");
 
                       currentTarget.data.fractionData = JSON.stringify("arbeitslos");

@@ -114,8 +114,8 @@ function giveNOOSECar(player, model, amout) {
                     gm.databaseManager.getConnection().query("SELECT * FROM vehicles WHERE numberplate = ?", [randomNumPlate], function (err1, res1) {
                       if (err1) console.log("Error in Select vehicles: "+err1)
                       res1.forEach(function (vehbuy) {
-                        gm.databaseManager.getConnection().query("INSERT INTO vehicleKeys (vehID, keyOwner, amout, isActive) VALUES (?,?,'2','Y')", [vehbuy.id, player.data.internalId], function(err3, res3) {
-                          if (err3) console.log("Error in Insert Vehiclekeys: "+err3);
+                        gm.databaseManager.getConnection().query("INSERT INTO vehiclekeys (vehID, keyOwner, amout, isActive) VALUES (?,?,'2','Y')", [vehbuy.id, player.data.internalId], function(err3, res3) {
+                          if (err3) console.log("Error in Insert vehiclekeys: "+err3);
                           player.notify("Fahrzeug mit Kennzeichen " + randomNumPlate + " wurde gekauft");
                           mp.events.call("sqlLog", player, player.data.ingameName+" hat "+vehData.bezeichnung+" für "+amout+"$ mit Kennzeichen "+randomNumPlate+" gekauft!");
                           var currentKeys = player.getVariable("currentKeys");

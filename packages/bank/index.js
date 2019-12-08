@@ -159,7 +159,7 @@ let ROBBING = false;
 
 mp.events.add("server:bank:ausrauben",(player,playerposx,playerposy,playerposz) => {     
     if (mp.players.exists(player)) {
-        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionUsers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
+        gm.databaseManager.getConnection().query("SELECT COUNT(c.id) AS counter FROM characters c LEFT JOIN fractionusers f ON c.id = f.playerCharId WHERE f.fractionID = 2 AND f.playerFractionDuty = 'Y' AND c.isOnline = 'Y'", function (err, res) {
             if (err) console.log("Error in Count Duty Officers: "+err);
             if (res[0].counter >= 2) { 
                 if(ROBBING == false) {

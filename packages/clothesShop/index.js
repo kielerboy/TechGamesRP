@@ -184,7 +184,7 @@ mp.events.add("server:clothesShop:openSubMenu", (player, item, gender, shop) => 
 
   mp.events.add("server:clothesShop:textures", (player) => {
     if(mp.players.exists(player)) {
-        gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
+        gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
             if (err2) console.log("Error in setModel + Clothes on Login");
             else if (res2.length > 0) {
             res2.forEach(function (modelData) {
@@ -697,7 +697,7 @@ function setClothes(player,id,type,price){
     player.setVariable("torso", "null");   
     player.setVariable("hosen", "null");
     player.setVariable("schuhe", "null");
-    gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
+    gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
         if (err2) console.log("Error in setModel + Clothes on Login");
 
         if (res2.length > 0) {
@@ -785,7 +785,7 @@ function setClothes(player,id,type,price){
   mp.events.add('inputValue', (player, trigger, output) => {
     if(trigger === "Saveoutfit") {
         if(mp.players.exists(player)) {
-            gm.databaseManager.getConnection().query("SELECT appearance, data FROM characterModel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
+            gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
                 if (err2) console.log("Error in setModel + Clothes on Login");
         
                 if (res2.length > 0) {
@@ -995,7 +995,7 @@ mp.events.add('server:ClothesMenu:save', (player) => {
         arrFull['props'] = arrProps;
         var arrFullJSON = JSON.stringify(arrFull);
 
-        gm.databaseManager.getConnection().query('UPDATE characterModel SET appearance = ? WHERE internalId = ?', [arrFullJSON, player.data.internalId], function (err, res, row) {
+        gm.databaseManager.getConnection().query('UPDATE charactermodel SET appearance = ? WHERE internalId = ?', [arrFullJSON, player.data.internalId], function (err, res, row) {
                 if (err) console.log("Error in Player Update Clothes Query: " + err);
         });		
 	}
