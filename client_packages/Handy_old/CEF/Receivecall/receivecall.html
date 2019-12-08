@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="receivecall.js" async></script>
+		<link rel="stylesheet" type="text/css" href="../navbar.css">
+		<link rel="stylesheet" type="text/css" href="receivecall.css">
+	</head>
+	<script>
+		var audio = new Audio('ringtone.ogg');
+		audio.volume = 0.3;
+		audio.play();
+	</script>
+	<body onload="setTimeDate()">
+		<audio volume="0.3" loop autoplay id="ringtone">
+			<source src="./ringtone.ogg" type="audio/ogg">
+		</audio>
+		<input id="callFrom" type="text" value="" readonly>
+		<div id="bgimg"></div>
+		<div id="navbar"></div>
+		<div id="icon_akku"></div>
+		<div id="icon_wifi"></div>
+		<div id="icon_connection"></div>
+		<div id="provider"><center>BetterCOM</center></div>
+		<div id="isRinging"></div>
+		<div id="button_call" class="buttons" onclick="buttoncallAccept()"></div>
+		<div id="button_reject" class="buttons" onclick="buttoncallRejected()"></div>
+		<div class='phone'></div>
+		<div class="quick-alo-ph-circle"></div>
+		<div class="quick-alo-ph-circle-fill"></div>
+		<div class="quick-alo-ph-img-circle"></div>
+
+		<script>
+		var url = new URL(window.location.href);
+		if(url.searchParams.get("leitstelle") != false) {
+			var phonenumber = url.searchParams.get("phonenumber");
+		//	document.getElementById("isRinging").innerHTML = "<center>NOTRUF <br> LEITSTELLE</center>";
+		//	document.getElementById("bgimg").style.content = "url('../bg3.png')";
+		} else {
+			var phonenumber = url.searchParams.get("phonenumber");
+			document.getElementById("isRinging").innerHTML = "<center>Ruft an ...</center>";
+		}
+		document.getElementById("callFrom").value = phonenumber;
+
+		</script>
+	</body>
+</html>

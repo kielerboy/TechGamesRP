@@ -1,0 +1,14 @@
+require('./AirportCarShop/index.js');
+require('./CarShop/index.js');
+require('./DOJCarShop/index.js');
+require('./LSCCarshop/index.js');
+require('./BennysCarshop/index.js');
+require('./BeekersCarshop/index.js');
+require('./MedicCarShop/index.js');
+require('./NOOSECarShop/index.js');
+require('./PoliceCarShop/index.js');
+require('./PoliceHeliShop/index.js');
+require('./MedicHeliShop/index.js');
+require('./TaxiCarShop/index.js');
+require('./BoomerangCars/index.js');
+require('./CashForTrashShop/index.js');

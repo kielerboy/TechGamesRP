@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="phonecalling.js" async></script>
+		<link rel="stylesheet" type="text/css" href="../navbar.css">
+		<link rel="stylesheet" type="text/css" href="phonecalling.css">
+	</head>
+	<script>
+		var audio = new Audio('dialtone.ogg');
+		audio.play();
+	</script>
+	<audio controls loop autoplay id="dialtone">
+		<source src="dialtone.ogg" type="audio/ogg">
+	</audio>
+	<body onload="setTimeDate()">
+		<input id="callingPartner" type="text" value="" readonly>
+		<div id="bgimg"></div>
+		<div id="navbar"></div>
+		<div id="icon_akku"></div>
+		<div id="icon_wifi"></div>
+		<div id="icon_connection"></div>
+		<div id="provider"><center>BetterCOM</center></div>
+		<div id="isCalling"><center>Rufe an</center></div>
+		<div id="button_decline" class="buttons" onclick="buttonDeclineCall()"></div>
+	</body>
+</html>

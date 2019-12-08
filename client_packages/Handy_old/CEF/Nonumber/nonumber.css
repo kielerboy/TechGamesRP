@@ -1,0 +1,73 @@
+@font-face {
+	font-family: 		clockfont;
+	src: 				url('../clock.ttf');
+}
+html, body {
+	-ms-user-select: None;
+ 	-moz-user-select: None;
+ 	-webkit-user-select: None;
+	margin: 			0;
+	height: 			100%;
+	overflow: 			hidden;
+	background-color: 	#00000000;
+}
+#bgimg {
+	z-index:			-1;
+	content:			url(../bg3.png);
+	width:				307px;
+	height:				522px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+}
+#nonumber {
+	display: none;
+}
+#callingPartner{
+	text-align: 		center;
+	border-style:		solid;
+	border-color:		#ffffffbb;
+	border-radius:		10px;
+	color:				#ffffffbb;
+	background-color:	#00000080;
+	z-index:			10;
+	width:				275px;
+	height:				30px;
+	position: 			absolute;
+	font-family: 		clockfont;
+	font-size: 			24px;
+	top:				200px;
+	left:				15px;
+}
+#isCalling {
+	pointer-events: 	none;
+	z-index:			5;
+	background-color:	#ffffff00;
+	color:				#dddddddd;
+	font-family:		providerfont;
+	font-size:			12px;
+	width:				200px;
+	height:				16px;
+	position: 			absolute;
+	top: 				150px;
+	left: 				50px;
+}
+.buttons{
+	border-style:		solid;
+	border-color:		#ffffffbb;
+	border-radius:		10px;
+	color:				#ffffffbb;
+	background-color:	#00000080;
+	z-index:			10;
+	width:				55px;
+	height:				55px;
+	position: 			absolute;
+	font-family: 		clockfont;
+	font-size: 			50px;
+	cursor:				pointer;
+}
+#button_reject{
+	border-color:		#f81515bb;
+	top:				360px;
+	left:				120px;
+}

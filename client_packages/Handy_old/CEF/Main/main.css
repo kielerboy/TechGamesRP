@@ -1,0 +1,154 @@
+@font-face {
+	font-family: 		clockfont;
+	src: 				url('../Roboto-Regular.ttf');
+}
+html, body {
+	-ms-user-select: None;
+ 	-moz-user-select: None;
+ 	-webkit-user-select: None;
+	margin: 			0;
+	height: 			100%;
+	overflow: 			hidden;
+	background-color: 	#00000000;
+}
+#bgimg {
+	z-index:			-1;
+	content:			url(../bg3.png);
+	width:				307px;
+	height:				522px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+}
+#time {
+	pointer-events: 	none;
+	z-index:			5;
+	background-color:	#20202000;
+	color:				#f3f3f3dd;
+	font-family:		clockfont;
+	font-size:			32px;
+	width:				307px;
+	height:				70px;
+	position: 			absolute;
+	top: 				30px;
+	left: 				0px;
+
+}
+#date {
+	pointer-events: 	none;
+	z-index:			5;
+	background-color:	#20202000;
+	color:				#dddddddd;
+	font-family:		clockfont;
+	font-size:			16px;
+	width:				307px;
+	height:				20px;
+	position: 			absolute;
+	top: 				65px;
+	left: 				0px;
+}
+.icons{
+	border-radius:		50px;
+	background-color:	#00000080;
+	z-index:			10;
+	width:				50px;
+	height:				50px;
+	position: 			absolute;
+	cursor:				pointer;
+	box-shadow: 		0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+#icon_phone {
+	content:			url(icons/phone.png);
+	top: 				370px;
+	left: 				60px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+	
+}
+#icon_phone:hover {
+	transform: 			scale(1.1);
+}
+
+
+
+#icon_contacts {
+	content:			url(icons/contact.png);
+	top: 				370px;
+	left: 				130px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+}
+#icon_contacts:hover {
+	transform: 			scale(1.1);
+}
+
+
+
+#icon_sms {
+	content:			url(icons/message.png);
+	top: 				370px;
+	left: 				200px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+}
+#icon_sms:hover {
+	transform: 			scale(1.1);
+}
+
+
+/* BANK */
+#icon_bank {
+	content:			url(icons/bank.png);
+	top: 				440px;
+	left: 				60px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+}
+#icon_bank:hover {
+	transform: 			scale(1.1);
+}
+
+
+/* SETTINGS */
+#icon_settings {
+	content: 			url(icons/settings.png);
+	top:				440px;
+	left:				200px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+}
+#icon_settings:hover {
+	transform: 			scale(1.1);
+}
+
+
+/* DISPATCHES */
+#icon_dispatches {
+	content:			url(icons/dispatch.png);
+	top:				440px;
+	left:				130px;
+	-webkit-transition: transform 0.3s ease-in-out;
+	-o-transition: 		transform 0.3s ease-in-out;
+	transition: 		transform 0.3s ease-in-out;
+	opacity:			0;
+	transition: 		1s;
+}
+
+#icon_dispatches:hover {
+	transform: scale(1.1);
+}

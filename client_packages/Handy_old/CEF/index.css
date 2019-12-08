@@ -1,0 +1,55 @@
+html, body {
+    -ms-user-select: None;
+    -moz-user-select: None;
+    -webkit-user-select: None;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #00000000;
+}
+#handy {
+    z-index:	1;
+    content:    url(phone.png);
+    pointer-events: none;
+    width:		468;
+    height:		829;
+    position: 	absolute;
+    bottom: 	-100px;
+    right: 		50px;
+}
+#content {
+    z-index:	0;
+    pointer-events: painted;
+    width: 		307px;
+    height: 	522px;
+    position: 	absolute;
+    bottom: 	52px;
+    right: 		132px;
+}
+#homebutton {
+    z-index:	10;
+    background-color: #ff505000;
+    width:		30;
+    height:		30;
+    position: 	absolute;
+    bottom: 	18px;
+    right: 		271px;
+}
+#backbutton {
+    z-index:	11;
+    background-color: #5050ff00;
+    width:		30;
+    height:		30;
+    position: 	absolute;
+    bottom: 	18px;
+    right: 		191px;
+}
+#menubutton {
+    z-index:	12;
+    background-color: #50ff5000;
+    width:		30;
+    height:		30;
+    position: 	absolute;
+    bottom: 	18px;
+    right: 		352px;
+}

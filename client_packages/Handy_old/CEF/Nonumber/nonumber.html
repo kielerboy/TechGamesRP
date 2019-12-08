@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="nonumber.js" async></script>
+		<link rel="stylesheet" type="text/css" href="../navbar.css">
+		<link rel="stylesheet" type="text/css" href="nonumber.css">
+	</head>
+	<script>
+			var audio = new Audio('nonumber.ogg');
+			audio.play();
+	</script>
+	<audio controls loop id="nonumber">
+			<source src="nonumber.ogg" type="audio/ogg">
+	</audio>
+	<body onload="setTimeDate()">
+		<input id="callingPartner" type="text" value="" readonly>
+		<div id="bgimg"></div>
+		<div id="navbar"></div>
+		<div id="icon_akku"></div>
+		<div id="icon_wifi"></div>
+		<div id="icon_connection"></div>
+		<div id="provider"><center>BetterCOM</center></div>
+		<div id="isCalling"><center>Nummer nicht vergeben</center></div>
+		<div id="button_reject" class="buttons" onclick="buttoncallRejected()"></div>
+		<script>
+		var url = new URL(window.location.href);
+		var phonenumber = url.searchParams.get("phonenumber");
+		document.getElementById("callingPartner").value = phonenumber;
+		</script>
+	</body>
+</html>

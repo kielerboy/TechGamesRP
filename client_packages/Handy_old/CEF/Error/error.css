@@ -1,0 +1,43 @@
+@font-face {
+	font-family: 		clockfont;
+	src: 				url('../clock.ttf');
+}
+html, body {
+	-ms-user-select: None; 
+ 	-moz-user-select: None; 
+ 	-webkit-user-select: None; 
+	margin: 			0;
+	height: 			100%;
+	overflow: 			hidden;
+	background-color: 	#00000000;
+}
+#bgimg {
+	z-index:			-1;
+	content:			url(../bg3.png);
+	width:				307px;
+	height:				522px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+}
+.icons{
+	border-style:		solid;
+	border-color:		#bbbbbbbb;
+	border-radius:		10px;
+	z-index:			10;
+	width:				55px;
+	height:				55px;
+	position: 			absolute;
+}
+#text {
+	z-index:			10;
+	position: 			absolute;
+	color:				#dddddddd;
+	top: 				30px;
+	left: 				10px;
+	width:				287px;
+}
+a {
+	color: 				white;
+	text-decoration: 	none;
+}

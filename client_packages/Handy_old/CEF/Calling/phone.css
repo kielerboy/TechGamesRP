@@ -1,0 +1,102 @@
+@font-face {
+	font-family: 		clockfont;
+	src: 				url('../clock.ttf');
+}
+html, body {
+	-ms-user-select: None;
+ 	-moz-user-select: None;
+ 	-webkit-user-select: None;
+	margin: 			0;
+	height: 			100%;
+	overflow: 			hidden;
+	background-color: 	#00000000;
+}
+#bgimg {
+	z-index:			-1;
+	content:			url(../bg3.png);
+	width:				307px;
+	height:				522px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+}
+#number{
+	text-align: 		center; 
+	border-style:		solid;
+	border-color:		#ffffffbb;
+	border-radius:		10px;
+	color:				#ffffffbb;
+	background-color:	#00000080;
+	z-index:			10;
+	width:				275px;
+	height:				30px;
+	position: 			absolute;
+	font-family: 		clockfont;
+	font-size: 			24px;
+	top:				50px;
+	left:				15px;
+}
+.buttons{
+	border-style:		solid;
+	border-color:		#ffffffbb;
+	border-radius:		10px;
+	color:				#ffffffbb;
+	background-color:	#00000080;
+	z-index:			10;
+	width:				55px;
+	height:				55px;
+	position: 			absolute;
+	font-family: 		clockfont;
+	font-size: 			50px;
+	cursor:				pointer;
+}
+#button_1{
+	top:				150px;
+	left:				30px;
+}
+#button_2{
+	top:				150px;
+	left:				120px;
+}
+#button_3{
+	top:				150px;
+	left:				210px;
+}
+#button_4{
+	top:				220px;
+	left:				30px;
+}
+#button_5{
+	top:				220px;
+	left:				120px;
+}
+#button_6{
+	top:				220px;
+	left:				210px;
+}
+#button_7{
+	top:				290px;
+	left:				30px;
+}
+#button_8{
+	top:				290px;
+	left:				120px;
+}
+#button_9{
+	top:				290px;
+	left:				210px;
+}
+#button_0{
+	top:				360px;
+	left:				120px;
+}
+#button_call{
+	border-color:		#50ff50bb;
+	top:				360px;
+	left:				30px;
+}
+#button_delete{
+	border-color:		#f81515bb;
+	top:				360px;
+	left:				210px;
+}

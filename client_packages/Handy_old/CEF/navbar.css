@@ -1,0 +1,82 @@
+@font-face {
+	font-family: 		providerfont;
+	src: 				url('HOLME_DEMO.ttf');
+}
+#icon_akku {
+	content:			url(Main/icons/akku4.png);
+	position: 			absolute;
+	z-index:			5;
+	width:				40px;
+	height:				40px;
+	top: 				-10px;
+	left:				260px;
+	right: 				0px;
+}
+#icon_connection {
+	content:			url(Main/icons/connection.png);
+	position: 			absolute;
+	z-index:			5;
+	width:				30px;
+	height:				30px;
+	top: 				-5px;
+	left: 				242px;
+}
+#icon_wifi {
+	content:			url(Main/icons/wifi.png);
+	position: 			absolute;
+	z-index:			5;
+	width:				30px;
+	height:				30px;
+	top: 				-5px;
+	left: 				225px;
+}
+#provider {
+	pointer-events: 	none;
+	z-index:			5;
+	background-color:	#ffffff00;
+	color:				#dddddddd;
+	font-family:		providerfont !important;
+	font-size:			12px !important;
+	width:				200px;
+	height:				16px;
+	position: 			absolute;
+	top: 				3.5px;
+	left: 				-55px;
+	letter-spacing: 0px !important;
+	font-weight: normal !important;
+}
+#navbar {
+	z-index:			4;
+	width:				30px;
+	height:				20px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				140px;
+	opacity: 			1;
+	letter-spacing: 0px !important;
+}
+#callingbar {
+	z-index:			4;
+	display: none;
+	background-color:	#00ff00;
+	width:				307px;
+	height:				40px;
+	position: 			absolute;
+	top: 				0px;
+	left: 				0px;
+	opacity: 			0.5;
+}
+#callingbartext {
+	pointer-events: 	none;
+	z-index:			5;
+	display: none;
+	background-color:	#ffffff00;
+	color:				#dddddddd;
+	font-family:		providerfont;
+	font-size:			12px;
+	width:				200px;
+	height:				16px;
+	position: 			absolute;
+	top: 				22px;
+	left: 				12px;
+}

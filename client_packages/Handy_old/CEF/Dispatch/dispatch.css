@@ -1,0 +1,166 @@
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: transparent;
+  background-size: cover;
+  margin: 0;
+  font-family: Roboto;
+}
+#bgimg {
+	z-index:			-1;
+	content:			url(../bg3.png);
+	width:				307px;
+	height:				522px;
+	position: 		absolute;
+	top: 				  0px;
+	left: 				0px;
+}
+.btn {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+form {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 350px;
+  height: 500px;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: .3s;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+form.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+h1 {
+  background: #12876f;
+  margin: 0;
+  padding: 8px;
+  color: white;
+  font: 300 20px Roboto;
+  text-align: center;
+}
+h1 span {
+  display: block;
+  background: url("https://cbwconline.com/IMG/Close.svg") center center no-repeat;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  cursor: pointer;
+  transition: .2s;
+}
+h1 span:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.group {
+  width: 250px;
+  margin: auto;
+  position: relative;
+}
+
+label {
+  position: absolute;
+  top: 7px;
+  font: 400 15px Roboto;
+  color: #A9A9A9;
+  cursor: text;
+  transition: .2s;
+}
+
+input {
+  background: linear-gradient(to bottom, transparent 92%, #12876f 100%) no-repeat;
+  background-position: -300px 0;
+  background-size: 300px 100%;
+  display: block;
+  width: 250px;
+  padding: 5px 0;
+  margin-top: 30px;
+  border: none;
+  border-bottom: solid 1px #12876f;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #F9F9F9 inset;
+}
+input:focus, input:valid {
+  background-position: 0 0;
+  outline: none;
+}
+input:focus ~ label, input:valid ~ label {
+  top: -12px;
+  color: #12876f;
+  font: 700 12px Roboto;
+}
+
+textarea, textarea:focus {
+  background: #F9F9F9;
+  width: 230px;
+  height: 230px;
+  padding: 9px;
+  margin-top: 30px;
+  border: 1px solid #12876f;
+  outline: none;
+  font: 300 15px Roboto;
+  resize: none;
+}
+textarea:focus, textarea:valid, textarea:focus:focus, textarea:focus:valid {
+  padding: 7px;
+  border: 3px solid #12876f;
+}
+textarea:focus ~ label, textarea:valid ~ label, textarea:focus:focus ~ label, textarea:focus:valid ~ label {
+  top: 12px;
+  left: 0;
+  color: #12876f;
+  font: 700 12px Roboto;
+}
+textarea ~ label, textarea:focus ~ label {
+  top: 35px;
+  left: 7px;
+}
+
+button {
+  display: block;
+  background: #12876f;
+  width: 200px;
+  height: 30px;
+  margin: 15px auto;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+button:hover {
+  nox-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+::selection {
+  background: #12876f;
+  color: white;
+}

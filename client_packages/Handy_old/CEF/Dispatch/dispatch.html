@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Material Design Contact Form</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700' rel='stylesheet' type='text/css'>
+
+
+
+      <link rel="stylesheet" href="dispatch.css">
+            <link rel="stylesheet" type="text/css" href="../navbar.css">
+
+
+</head>
+
+<body>
+  <div id="bgimg"></div>
+  <div id="navbar"></div>
+  <div id="icon_akku"></div>
+  <div id="icon_wifi"></div>
+  <div id="icon_connection"></div>
+  <div id="provider"><center>BetterCOM</center></div>
+
+
+<div class="btn"></div>
+<div class="overlay"></div>
+<form class="contact">
+  <h1>Dispatch<span id="close"></span></h1>
+  <div class="group">
+    <button value="lspd" onclick="sendDispatch('lspd')">Polizei</button>
+  </div>
+  <div class="group">
+    <button value="lsmc" onclick="sendDispatch('lsmc')">Mediziner</button>
+  </div>
+  <div class="group">
+    <button value="taxi" onclick="sendDispatch('cabco')">Taxi</button>
+  </div>
+</form>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+
+    <script  src="dispatch.js"></script>
+
+
+
+
+</body>
+
+</html>
