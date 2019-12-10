@@ -114,7 +114,7 @@ mp.events.add({
         try {
             if(!player) return;
             if(!logfile) return;
-             gm.databaseManager.getConnection().query("INSERT INTO logs (id, playername, log, socialclub, ip) VALUES ('',?,?,?,?)", [player.data.ingameName, logfile, player.socialClub, player.ip], function(err, res) {
+             gm.databaseManager.getConnection().query("INSERT INTO logs (playername, log, socialclub, ip) VALUES (?,?,?,?)", [player.data.ingameName, logfile, player.socialClub, player.ip], function(err, res) {
                     if(err) console.log("FILE: ERROR on sqlLog for player " + player.data.ingameName + ": " + err);
             });
         } catch(ex) {
@@ -128,7 +128,7 @@ mp.events.add({
       try {
           if(!player) return;
           if(!logfile) return;
-           gm.databaseManager.getConnection().query("INSERT INTO adminlogs (id, playername, log, socialclub, ip) VALUES ('',?,?,?,?)", [player.data.ingameName, logfile, player.socialClub, player.ip], function(err, res) {
+           gm.databaseManager.getConnection().query("INSERT INTO adminlogs (playername, log, socialclub, ip) VALUES (?,?,?,?)", [player.data.ingameName, logfile, player.socialClub, player.ip], function(err, res) {
                   if(err) console.log("FILE: ERROR on sqlLog for player " + player.data.ingameName + ": " + err);
           });
       } catch(ex) {

@@ -139,7 +139,7 @@ mp.events.add("inputValueShop", (player, trigger, output) => {
                                   } else {
                                     player.removeBar(player, output * 1 * item.amout * 1, (success, error) => {
                                       if (success) {
-                                        gm.databaseManager.getConnection().query("INSERT INTO user_items VALUES('', ?, ?, ?)", [player.data.internalId, item.itemId, output], function (err6, res6) {
+                                        gm.databaseManager.getConnection().query("INSERT INTO user_items (charId, itemId, amout) VALUES (?,?,?)", [player.data.internalId, item.itemId, output], function (err6, res6) {
                                           if (err6) console.log("Error in insert new item on buy query6: "+err6);
                                         });
                                         player.notify("~g~Du hast ~r~" + output + "x ~g~" + but + "~g~ gekauft!");
@@ -159,7 +159,7 @@ mp.events.add("inputValueShop", (player, trigger, output) => {
                             if (parseFloat(itemweight).toFixed(2) <= parseFloat(player.data.inventory)) {
                               player.removeBar(player, output * 1 * item.amout * 1, (success, error) => {
                                 if (success) {
-                                  gm.databaseManager.getConnection().query("INSERT INTO user_items VALUES('', ?, ?, ?)", [player.data.internalId, item.itemId, output], function (err5, res5) {
+                                  gm.databaseManager.getConnection().query("INSERT INTO user_items (charId, itemId, amout) VALUES (?,?,?)", [player.data.internalId, item.itemId, output], function (err5, res5) {
                                     if (err5) console.log("Error in insert new item on buy query5: "+err5);
                                   });
                                   player.notify("~g~Du hast ~r~" + output + "x ~g~" + but + "~g~ gekauft!");
