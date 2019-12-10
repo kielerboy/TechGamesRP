@@ -62,7 +62,7 @@ function destroyVeh(player) {
 mp.events.add("server:Admin:destroyVeh", destroyVeh);
 
 mp.events.add('server:admin:tpto', (player, id) => {
-  mp.events.call("adminLog", player, player.data.ingameName+" hat sich zu" +id+ " teleportiert");
+  mp.events.call("adminlog", player, player.data.ingameName+" hat sich zu" +id+ " teleportiert");
   var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);
   if(fractionData.fractionName == "NOOSE") {
@@ -79,7 +79,7 @@ mp.events.add('server:admin:tpto', (player, id) => {
 });
 
 mp.events.add('server:admin:heal', (player, id) => {
-  mp.events.call("adminLog", player, player.data.ingameName+" hat" +id+ " geheilt");
+  mp.events.call("adminlog", player, player.data.ingameName+" hat" +id+ " geheilt");
   var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);
   if(fractionData.fractionName == "NOOSE") {

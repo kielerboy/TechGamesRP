@@ -124,7 +124,7 @@ mp.events.add({
 });
 
 mp.events.add({
-  "adminLog" : async (player, logfile) => {
+  "adminlog" : async (player, logfile) => {
       try {
           if(!player) return;
           if(!logfile) return;

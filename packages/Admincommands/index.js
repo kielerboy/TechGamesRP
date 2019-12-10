@@ -4,7 +4,7 @@ var fractionData = player.data.fractionData;
   if(fractionData.fractionName == "NOOSE"){
     if (player.vehicle) {
       player.vehicle.setVariable("fuel","100");
-      mp.events.call("adminLog", player, player.data.ingameName+" hat ein Fahrzeug aufgetankt");
+      mp.events.call("adminlog", player, player.data.ingameName+" hat ein Fahrzeug aufgetankt");
     }
 }
 });
@@ -14,7 +14,7 @@ var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);
   if(fractionData.fractionName == "NOOSE"){
     gm.weather.currentWeather = fullText;
-    mp.events.call("adminLog", player, player.data.ingameName+" hat dass Wetter geändert");
+    mp.events.call("adminlog", player, player.data.ingameName+" hat dass Wetter geändert");
   }
 });
 
@@ -57,7 +57,7 @@ mp.events.addCommand("banUser", (player, userToBan) => {
           var accountId = playerToBan.data.accountId;
           gm.databaseManager.getConnection().query("UPDATE `accounts` SET isBanned = 'Y' WHERE id = ?", [accountId], function (err, res) {
             if (err) console.log("Error in Ban query: "+err);
-            mp.events.call("adminLog", player, player.data.ingameName+" hat" +userToBan+ " gebannt");
+            mp.events.call("adminlog", player, player.data.ingameName+" hat" +userToBan+ " gebannt");
           });
           playerToBan.outputChatBox(`!{255, 0, 0}Du wurdest gebannt. Bitte melde dich im Support!`);
           playerToBan.kick('Du wurdest gebannt. Bitte melde dich im Support!');
@@ -74,7 +74,7 @@ mp.events.addCommand("kickUser", (player, userToKick) => {
     if (fractionData.fractionName == "NOOSE") {
       mp.players.forEach((playerToKick, id) => {
           if (playerToKick.name == userToKick) {
-            mp.events.call("adminLog", player, player.data.ingameName+" hat" +userToKick+ " gekickt");
+            mp.events.call("adminlog", player, player.data.ingameName+" hat" +userToKick+ " gekickt");
             playerToKick.kick('Du wurdest gekickt!');
             playerToKick.call("client:voice:endConnection");
           }
@@ -85,7 +85,7 @@ mp.events.addCommand("kickUser", (player, userToKick) => {
 mp.events.addCommand("playersNotify", (player, fullText) => {
         var fractionData = player.data.fractionData;
         fractionData = JSON.parse(fractionData);
-        mp.events.call("adminLog", player, player.data.ingameName+" hat folgende Notify geschrieben:" +fullText);
+        mp.events.call("adminlog", player, player.data.ingameName+" hat folgende Notify geschrieben:" +fullText);
         if(fractionData.fractionName == "NOOSE") {
              mp.players.forEach(
              (player, id) => {
@@ -113,7 +113,7 @@ var fractionData = player.data.fractionData;
     }
   });
   player.notify("Alle Spieler wiederbelebt!");
-  mp.events.call("adminLog", player, player.data.ingameName+" hat alle Spieler wiederbelebt");
+  mp.events.call("adminlog", player, player.data.ingameName+" hat alle Spieler wiederbelebt");
 }
 });
 
@@ -145,12 +145,12 @@ mp.events.addCommand("veh", (player, full, hash, r, g, b, r2, g2, b2) => {
         veh.setColorRGB(parseInt(r), parseInt(g), parseInt(b), parseInt(r2), parseInt(g2), parseInt(b2));
         player.putIntoVehicle(veh, -1);
     }
-    mp.events.call("adminLog", player, player.data.ingameName+" hat sich ein TempVeh gespawnt " +hash);
+    mp.events.call("adminlog", player, player.data.ingameName+" hat sich ein TempVeh gespawnt " +hash);
 });
 
 // Command to teleport to player
 mp.events.addCommand('tpto', (player, commandName) => {
-  mp.events.call("adminLog", player, player.data.ingameName+" hat sich zu" +commandName+ " teleportiert");
+  mp.events.call("adminlog", player, player.data.ingameName+" hat sich zu" +commandName+ " teleportiert");
   var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);
   if(fractionData.fractionName == "NOOSE") {
@@ -167,7 +167,7 @@ mp.events.addCommand('tpto', (player, commandName) => {
 
 // Command to teleport a player to you
 mp.events.addCommand('tphere', (player, commandName) => {
-  mp.events.call("adminLog", player, player.data.ingameName+" hat" +commandName+" zu sich Teleportiert");
+  mp.events.call("adminlog", player, player.data.ingameName+" hat" +commandName+" zu sich Teleportiert");
   var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);
   if(fractionData.fractionName == "NOOSE"){
@@ -204,7 +204,7 @@ mp.events.addCommand('weapon', (player, fullText, weapon, ammo) => {
         var weaponHash = mp.joaat(weapon);
         player.giveWeapon(weaponHash, parseInt(ammo) || 10000);
     }
-    mp.events.call("adminLog", player, player.data.ingameName+" hat sich eine Waffe gegeben: "+weapon);
+    mp.events.call("adminlog", player, player.data.ingameName+" hat sich eine Waffe gegeben: "+weapon);
 });
 
 mp.events.addCommand("tp", (player, location) => {
@@ -243,7 +243,7 @@ mp.events.addCommand("tp", (player, location) => {
         } else if (location == "chilliard") {
             player.spawn(new mp.Vector3(501.67, 5603.82, 797.91));
         }
-        mp.events.call("adminLog", player, player.data.ingameName+" hat sich teleportiert zu: "+location);
+        mp.events.call("adminlog", player, player.data.ingameName+" hat sich teleportiert zu: "+location);
     }
 });
 

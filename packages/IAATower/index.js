@@ -146,7 +146,7 @@ mp.events.add("server:NOOSE:onDuty", (player, PlayerRank) => {
             }
         }
         player.notify(`Du hast den Dienst als ${PlayerRank} angetreten!`);
-        mp.events.call("adminLog", player, player.data.ingameName + " hat den Dienst angetreten als NOOSE Agent");
+        mp.events.call("adminlog", player, player.data.ingameName + " hat den Dienst angetreten als NOOSE Agent");
         gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionDuty = 'Y' WHERE playerCharID = " + player.data.internalId, function(errUp, resUp) {
             if (errUp) console.log("Error: " + errUp);
             gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
@@ -182,7 +182,7 @@ mp.events.add("server:NOOSE:offDuty", (player) => {
 
                     gm.databaseManager.getConnection().query("UPDATE fractionusers SET playerFractionDuty = 'N' WHERE playerCharID = " + player.data.internalId, function(errUp, resUp) {
                         if (errUp) console.log("Error: " + errUp);
-                        mp.events.call("adminLog", player, player.data.ingameName + " hat den Dienst verlassen als NOOSE Agent");
+                        mp.events.call("adminlog", player, player.data.ingameName + " hat den Dienst verlassen als NOOSE Agent");
                         gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
                             if (err2) console.log("Error on Set Fraction");
 
@@ -205,11 +205,11 @@ function setInvisible(player, state) {
     if (mp.players.exists(player)) {
         if (state == "Unsichtbar") {
             player.alpha = 0;
-            mp.events.call("adminLog", player, player.data.ingameName + " hat sich unsichtbar gemacht!");
+            mp.events.call("adminlog", player, player.data.ingameName + " hat sich unsichtbar gemacht!");
         }
         if (state == "Sichtbar") {
             player.alpha = 255;
-            mp.events.call("adminLog", player, player.data.ingameName + " hat sich sichtbar gemacht");
+            mp.events.call("adminlog", player, player.data.ingameName + " hat sich sichtbar gemacht");
         }
     }
 }
