@@ -1,6 +1,5 @@
 const toClient = require('../.RageLife/core/toClient.js');
 
-
 mp.events.add("server:inventory:openInteract", (player) => {
 
 });

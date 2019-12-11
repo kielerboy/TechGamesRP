@@ -16,7 +16,6 @@ mp.events.add("server:kofferaum:firststep", (player) => {
   }
 });
 
-
 mp.events.add("server:kofferraum:einladen", (player, vehicle) => {
   if(mp.players.exists(player) && mp.vehicles.exists(vehicle)) {
     var numberplate = vehicle.getVariable("numberPlate");

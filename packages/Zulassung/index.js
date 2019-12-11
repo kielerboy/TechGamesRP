@@ -1,7 +1,6 @@
 //ZUL SHAPE
 let ZULColShape = mp.colshapes.newSphere(-539.50, -189.88, -157.21, 2, 7);
 
-
 mp.events.add("server:Keybind:KeyE", (player) => {
   if(mp.players.exists(player)) {
     if(ZULColShape.isPointWithin(player.position)) {
@@ -13,13 +12,13 @@ mp.events.add("server:Keybind:KeyE", (player) => {
 mp.events.add("server:zulassung:prepareVehicles", (player) => {
   if(mp.players.exists(player)) {
     gm.databaseManager.getConnection().query("SELECT * FROM vehicles WHERE owner = ?", [player.data.internalId], function(err, res) {
-  	if (err) console.log("ERROR in Select Vehicles: "+err);
+  	if (err) console.log("ERROR in Select Vehicles: " + err);
   		if (res.length > 0) {
   			var i = 1;
   			let VehList = [];
   			res.forEach(function(veh) {
   				if (gm.vehicleData[""+veh.modelId]) {
-  					vehData = gm.vehicleData[""+veh.modelId];
+  					vehData = gm.vehicleData["" + veh.modelId];
   				} else {
   					vehData = gm.vehicleData["undefiniert"];
   				}

@@ -17,20 +17,20 @@ require('./shop.js');
 console.log("[Server] Loaded shop.js!");
 
 setTimeout(function() {
-  gm.databaseManager.getConnection().query("UPDATE characters SET isOnline = 'N', currentOnlineId = 0 WHERE 1 = 1",function(err, res) {
-    if (err) console.log("Error in update players on startup: "+err);
-    gm.databaseManager.getConnection().query("SELECT * FROM vehicles WHERE isSpawned = 'Y'",function(err1,res1) {
-      if(err1) console.log("Error in Select vehicles on startup: "+err1);
-      var aktdate = new Date();
-      var aktmonth = parseInt(parseInt(aktdate.getMonth()) + 1);
-      var aktdatum = ""+aktdate.getFullYear()+"-"+aktmonth+"-"+aktdate.getDate()+"-"+aktdate.getHours();+"";
-      res1.forEach(function(date) {
-        var datum = parseInt(date.datum);
-        var monat = parseInt(date.monat);
-        var stunde = parseInt(date.stunde);
-      });
+    gm.databaseManager.getConnection().query("UPDATE characters SET isOnline = 'N', currentOnlineId = 0 WHERE 1 = 1",function(err, res) {
+        if (err) console.log("Error in update players on startup: " + err);
+        gm.databaseManager.getConnection().query("SELECT * FROM vehicles WHERE isSpawned = 'Y'",function(err1,res1) {
+            if(err1) console.log("Error in Select vehicles on startup: "+err1);
+            var aktdate = new Date();
+            var aktmonth = parseInt(parseInt(aktdate.getMonth()) + 1);
+            var aktdatum = ""+aktdate.getFullYear()+"-"+aktmonth+"-"+aktdate.getDate()+"-"+aktdate.getHours();+"";
+            res1.forEach(function(date) {
+                var datum = parseInt(date.datum);
+                var monat = parseInt(date.monat);
+                var stunde = parseInt(date.stunde);
+            });
+        });
     });
-  });
 
 }, 3000);
 

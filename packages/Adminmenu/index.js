@@ -1,4 +1,3 @@
-
 function VehNearestPlayer(player, playerForVeh) {
   var vehTuning = {
     pcolor: 0,

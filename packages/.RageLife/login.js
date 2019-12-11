@@ -31,6 +31,7 @@ mp.events.add({
         player.alpha = 255;
         player.data.fractionData = JSON.stringify("arbeitslos");
         player.data.businessData = JSON.stringify("arbeitslos");
+		player.data.teamData = JSON.stringify("spieler");
 
 
         gm.databaseManager.getConnection().query("SELECT username FROM accounts where socialClub = ?", [player.socialClub], function(err, res) {
@@ -66,7 +67,7 @@ mp.events.add({
                         });
 
                     });
-                    
+
                     gm.databaseManager.getConnection().query("SELECT spawnerX , spawnerY , spawnerZ FROM garages", function(err, res) {
                         if (err) console.log(err);
                         if (!res) return;
@@ -195,6 +196,19 @@ mp.events.add({
                         if (errUp) console.log("Error in update character on login: " + errUp);
                     });
 
+                    //Set Team to Player..
+                    player.data.teamData = JSON.stringify("spieler");
+                    gm.databaseManager.getConnection().query("SELECT f.teamName, f.teamID, r.id AS teamRankID, r.teamRankName, r.teamRank FROM teamusers u LEFT JOIN teamranks r ON r.id = u.teamRankID LEFT JOIN team f ON f.teamID = u.teamID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                        if (err2) console.log("Error on Set Team");
+
+                        if (res2.length > 0) {
+                            res2.forEach(function(team) {
+                                player.data.teamData = JSON.stringify(team);
+                                //player.data.fractionClothes = JSON.stringify(fraction.clothes);
+                            });
+                        }
+                    });
+					
                     //Set Fraction to Player..
                     player.data.fractionData = JSON.stringify("arbeitslos");
                     gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy, u.clothes FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
@@ -219,7 +233,6 @@ mp.events.add({
                             });
                         }
                     });
-
 
                     player.colorForOverlayIdx = function(index) {
                         let color;

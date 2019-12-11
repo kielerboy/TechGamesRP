@@ -23,9 +23,6 @@ const fibtopexitmarker = mp.markers.new(2, new mp.Vector3(121.1474380493164, -72
     dimension: 0
 });
 
-
-
-
 //FIB Erste Etage
 mp.events.add("1ET", (player, x, y, z) => {
     if(FIBColShape.isPointWithin(player.position)) {

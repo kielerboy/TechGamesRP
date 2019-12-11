@@ -249,7 +249,7 @@ mp.events.add("client:police:leitstellensystem", (link) => {
 
   mp.events.add("client:police:aktensystem", (link) => {
     if (akten == null) {
-      akten = mp.browsers.new('package://TechGames/PDComputer/index.html');
+      akten = mp.browsers.new('package://TechGames/Police/Akten/index.html');
       //akten.execute("changeLink('"+link+"')");
       mp.gui.cursor.show(true, true);
       mp.gui.chat.activate(false);

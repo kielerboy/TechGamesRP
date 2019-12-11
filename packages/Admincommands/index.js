@@ -18,6 +18,15 @@ var fractionData = player.data.fractionData;
   }
 });
 
+mp.events.addCommand('test', (player) => {
+	var teamData = player.data.teamData;
+	teamData = JSON.parse(teamData);
+	if(teamData.teamName == "Projektleitung") {
+		player.notify("Dein Teamrang -> : " + teamData.teamName);
+	}
+});
+
+
 mp.events.addCommand('noose', (player) => {
   var fractionData = player.data.fractionData;
   fractionData = JSON.parse(fractionData);

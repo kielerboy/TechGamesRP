@@ -17,10 +17,9 @@ let discounterShape10 = mp.colshapes.newSphere(-3169.07, 1044, 20, 3, 0);
 mp.events.add("server:Keybind:KeyE", (player) => {
   if(mp.players.exists(player)) {
     if(discounterShape.isPointWithin(player.position) || discounterShape2.isPointWithin(player.position) || discounterShape3.isPointWithin(player.position) ||
-                                                          discounterShape4.isPointWithin(player.position) || discounterShape5.isPointWithin(player.position) || discounterShape6.isPointWithin(player.position) ||
-                                                          discounterShape7.isPointWithin(player.position) || discounterShape9.isPointWithin(player.position) || discounterShape10.isPointWithin(player.position) ||
-                                                          discounterShape11.isPointWithin(player.position) || discounterShape12.isPointWithin(player.position) ) {
-
+        discounterShape4.isPointWithin(player.position) || discounterShape5.isPointWithin(player.position) || discounterShape6.isPointWithin(player.position) ||
+        discounterShape7.isPointWithin(player.position) || discounterShape9.isPointWithin(player.position) || discounterShape10.isPointWithin(player.position) ||
+        discounterShape11.isPointWithin(player.position) || discounterShape12.isPointWithin(player.position) ) {
       player.call("client:ClothesMenu:OpenMenu");
     }
   }

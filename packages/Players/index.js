@@ -286,7 +286,6 @@ function getNearestPlayer(player, range) {
   });
 }
 
-
 mp.events.add("server:players:supportlog", (player) => {
   if(mp.players.exists(player)) {
             var usersInRange = [];
@@ -370,15 +369,15 @@ mp.events.add("server:duty:openMenu", (player) => {
   gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err, res) {
     if (res.length > 0) {
         var i = 1;
-  			let fractionList = [];
-  			res.forEach(function(fraction) {
-  				let obj = {"fractionname": String(fraction.fractionName), "duty": String(fraction.playerFractionDuty)};
-  				fractionList.push(obj);
-  				if (parseInt(i) == parseInt(res.length)) {
-  					if(mp.players.exists(player)) player.call("client:duty:openMenu", [JSON.stringify(fractionList)]);
-  				}
-  				i++;
-  			});
+  		let fractionList = [];
+  		res.forEach(function(fraction) {
+  			let obj = {"fractionname": String(fraction.fractionName), "duty": String(fraction.playerFractionDuty)};
+  			fractionList.push(obj);
+  			if (parseInt(i) == parseInt(res.length)) {
+  				if(mp.players.exists(player)) player.call("client:duty:openMenu", [JSON.stringify(fractionList)]);
+  			}
+  			i++;
+  		});
     }
   });
 });

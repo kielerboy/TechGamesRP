@@ -5,10 +5,7 @@ var fuel = 100;
 var speed = 0;
 var money = 0;
 
-var interval = null;
-
-mp.game.ui.hideHudComponentThisFrame(7);
-mp.game.ui.hideHudComponentThisFrame(9);
+var interval = 0;
 
 function setVisible(state) {
     if (state == "true") {
@@ -72,5 +69,9 @@ function setHealthValues(health, armor) {
     document.getElementsByClassName("inarmor")[0].style.width = armor + "%";
 }
 
+var update = setInterval(myTimer, 500);
 
-// Speedo
+function myTimer() {
+    document.getElementsByClassName("indrink")[0].style.width = drink + "%";
+    document.getElementsByClassName("infood")[0].style.width = food + "%";
+}

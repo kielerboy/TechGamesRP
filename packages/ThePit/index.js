@@ -19,7 +19,6 @@ mp.events.add("server:Keybind:KeyE", (player) => {
   }
 });
 
-
 mp.events.add("server:Keybind:KeyO", (player) => {
   if(mp.players.exists(player)) {
     var businessData = player.data.businessData;
@@ -109,8 +108,6 @@ function firePlayer(player) {
 }
 mp.events.add("server:thepit:firePlayer", firePlayer);
 
-
-
 mp.events.add("server:thepit:onDuty", (player) => {
   if(mp.players.exists(player)) {
     player.notify("Du hast den Dienst angetreten");
@@ -163,7 +160,6 @@ mp.events.add("server:thepit:offDuty", (player) => {
     });
   }
 });
-
 
 var currentTarget = null;
 function getNearestPlayer(player, range)

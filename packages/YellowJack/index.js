@@ -1,6 +1,5 @@
 var yellowjackDutyColShape = mp.colshapes.newSphere(1985.25, 3048.71, 47.21, 2, 0);
 
-
 mp.events.add("server:Keybind:KeyE", (player) => {
   if(mp.players.exists(player)) {
     var businessData = player.data.businessData;
@@ -13,7 +12,6 @@ mp.events.add("server:Keybind:KeyE", (player) => {
     }
   }
 });
-
 
 mp.events.add("server:Keybind:KeyO", (player) => {
   if(mp.players.exists(player)) {
@@ -100,8 +98,6 @@ function firePlayer(player) {
 }
 mp.events.add("server:yellowjack:firePlayer", firePlayer);
 
-
-
 mp.events.add("server:yellowjack:onDuty", (player) => {
   if(mp.players.exists(player)) {
     player.notify("Du hast den Dienst angetreten");
@@ -154,7 +150,6 @@ mp.events.add("server:yellowjack:offDuty", (player) => {
     });
   }
 });
-
 
 var currentTarget = null;
 function getNearestPlayer(player, range)

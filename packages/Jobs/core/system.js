@@ -3,7 +3,7 @@ mp.events.add("givePlayerJobMoney", (player,toBank,money) => {
   if(mp.players.exists(player)) {
     if (toBank) {
 
-        TODO: Geld auf bank hinzufügen
+        //TODO: Geld auf bank hinzufügen
 
         player.data.money = (player.data.money + money);
         gm.databaseManager.getConnection().query('UPDATE characters SET money = ? WHERE id = ?', [player.data.money, player.data.internalId],

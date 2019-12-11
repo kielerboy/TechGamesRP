@@ -1,18 +1,11 @@
-// Keybinds rufen Server- und Clientevents auf, wenn der Spieler die Taste drückt
-
 player = mp.players.local;
 let MinimapShow = true;
-
-
 
 // Taste "E"
 mp.keys.bind(0x45, true, function() {
     if (mp.gui.chat.enabled === true || player.getVariable("isUnconcious") == 'true' || player.getVariable('state') !== 'INGAME' || player.getVariable('cuffState') == 'CUFFED' || mp.gui.cursor.visible === true) return;
     mp.events.callRemote('server:Keybind:KeyE');
     mp.events.call('client:Keybind:KeyE');
-    //LEGACY (wird entfernt, sobald alle keypressE genannten Events Serverside entfernt wurden)
-    //mp.events.callRemote('keypressE');
-    //mp.events.call('keypressE');
 });
 
 // TASTE "K"

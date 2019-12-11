@@ -15,7 +15,6 @@ function playerExitColshapeHandler(player, shape) {
 }
 mp.events.add("playerExitColshape", playerExitColshapeHandler);
 
-
 mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
   function unterschreiben(player) {
     if(mp.players.exists(player)){
@@ -31,7 +30,6 @@ mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
           unterschreiben(player);
        });
 
-
        mp.events.add("server:spediteur:kündigen", (player,kündigen) => {
         function kündigen(player) {
           if(mp.players.exists(player)){
@@ -46,7 +44,6 @@ mp.events.add("server:spediteur:unterschreiben", (player,unterschreiben) => {
                 }
                 kündigen(player);
              });
-
 
              mp.events.add("server:spediteur:startJob", (player) => {
               if(mp.players.exists(player)){
