@@ -125,4 +125,4 @@ Read file [THANKS](THANKS).
 * [Website](#)
 * [Wiki](#)
 * [Forums](#)
-* [Discord](#)
+* [Discord](https://discord.gg/VzJnZtx)
