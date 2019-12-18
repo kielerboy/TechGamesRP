@@ -46,6 +46,7 @@ mp.events.add("client:Documents:Perso", (playerName, dateOfBirth) => {
     }, 10000);
   }
 });
+
 mp.events.add("client:Documents:DriverLicense", (playerName, dateOfBirth) => {
   if (document == null) {
     document = mp.browsers.new('package://TechGames/Dokumente/driverlicense.html');
@@ -73,8 +74,7 @@ mp.events.add("client:Documents:DriverLicense", (playerName, dateOfBirth) => {
 }
 setInterval(checkMinimap, 1000);*/
 
-
-  function dutyMenu(fracJSON){
+function dutyMenu(fracJSON){
     ui_List = new Menu("Dienstverwaltung", "", MenuPoint);
     ui_List.Visible = true;
     ui_List.AddItem( new UIMenuItem("Arbeitsverhältniss", ""));

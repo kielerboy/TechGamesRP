@@ -269,6 +269,9 @@ changeWeather();*/
 function weatherSync() {
     var weather = gm.weather.currentWeather;
     mp.players.call("client:world:weatherUpdate", [gm.weather.currentWeather]);
+	var weather = mp.world.weather; // GETTER
+    mp.world.weather = 'XMAS'; // SETTER
+
 }
 setInterval(weatherSync, 60000);
 

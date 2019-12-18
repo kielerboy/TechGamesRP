@@ -13,6 +13,7 @@ const player = mp.players.local;
 let radioKillTimer = null;
 let state = 'LOGIN';
 let fraktion = 'arbeitslos';
+let team = "spieler";
 let browser = null;
 let progressbarTimeout = null;
 let camera = null;
@@ -35,7 +36,7 @@ const verkehrsamt = new mp.Vector3(-547.6566772460938, -247.71319580078125, 36.4
 let collorTrigger = "primary";
 let duty = "Feierabend";
 let MinimapShow = true;
-//let mp.gui.chat.enabled = false;
+
 mp.gui.chat.activate(false);
 mp.nametags.enabled = false;
 mp.game.gameplay.disableAutomaticRespawn(true);
@@ -73,9 +74,9 @@ mp.events.add("client:world:weatherUpdate", (newWeather) => {
             mp.game.gameplay.setRainFxIntensity(0.0);
         }
     } else {
-        mp.game.gameplay.setOverrideWeather("CLEAR");
-        mp.game.gameplay.setWeatherTypeNow("CLEAR");
-        mp.game.gameplay.setWeatherTypePersist("CLEAR");
+        mp.game.gameplay.setOverrideWeather("XMAS");
+        mp.game.gameplay.setWeatherTypeNow("XMAS");
+        mp.game.gameplay.setWeatherTypePersist("XMAS");
         mp.game.gameplay.setRainFxIntensity(0.0);
     }
 });
