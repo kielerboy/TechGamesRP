@@ -74,7 +74,7 @@ mp.events.addCommand("banUser", (player, userToBan) => {
           .query(
             "UPDATE `accounts` SET isBanned = 'Y' WHERE id = ?",
             [accountId],
-            function(err, res) {
+            function (err, res) {
               if (err) console.log("Error in Ban query: " + err);
               mp.events.call(
                 "adminlog",
@@ -224,17 +224,17 @@ mp.events.addCommand("tphere", (player, commandName) => {
   }
 });
 
-let getCharIdByCommandName = function(name, clb) {
+let getCharIdByCommandName = function (name, clb) {
   gm.databaseManager
     .getConnection()
-    .query("SELECT id FROM characters WHERE commandName = ?", [name], function(
+    .query("SELECT id FROM characters WHERE commandName = ?", [name], function (
       err,
       res
     ) {
       if (err) console.log(err);
 
       if (res.length > 0) {
-        res.forEach(function(charId) {
+        res.forEach(function (charId) {
           // console.log(charId);
           clb(true, charId.id);
         });
@@ -259,9 +259,9 @@ mp.events.addCommand("weapon", (player, fullText, weapon, ammo) => {
 });
 
 mp.events.addCommand("tp", (player, location) => {
-  var fractionData = player.data.fractionData;
-  fractionData = JSON.parse(fractionData);
-  if (fractionData.fractionName == "NOOSE") {
+  var teamData = player.data.teamData;
+  teamData = JSON.parse(teamData);
+  if (teamData.teamName == "Projektleitung" || teamData.teamName == "Supporter") {
     if (location == "medical_center") {
       player.spawn(new mp.Vector3(275.446, -1361.11, 24.5378));
     } else if (location == "iaa_office") {
@@ -326,7 +326,7 @@ mp.events.addCommand("fillUp", (player, valueDrink, valueFood) => {
       .query(
         "UPDATE characters SET drink = ?, food = ? WHERE id = ?",
         [valueDrink, valueFood, player.data.internalId],
-        function(err6, res2, row2) {
+        function (err6, res2, row2) {
           if (err6) console.log("Error in FillUp Command: " + err6);
         }
       );
@@ -346,7 +346,7 @@ mp.events.addCommand("setHealth", (player, valueHealth) => {
       .query(
         "UPDATE characters SET health = ? WHERE id = ?",
         [valueHealth, player.data.internalId],
-        function(err7, res7, row7) {
+        function (err7, res7, row7) {
           if (err7) console.log("Error in setHealth Command: " + err7);
         }
       );
@@ -357,14 +357,14 @@ mp.events.addCommand("setHealth", (player, valueHealth) => {
 mp.events.addCommand("pos", (player, text) => {
   console.log(
     text +
-      ": " +
-      player.position.x +
-      ", " +
-      player.position.y +
-      ", " +
-      player.position.z +
-      ", " +
-      player.heading
+    ": " +
+    player.position.x +
+    ", " +
+    player.position.y +
+    ", " +
+    player.position.z +
+    ", " +
+    player.heading
   );
   player.notify("~g~Position " + text + " gesendet.");
 });

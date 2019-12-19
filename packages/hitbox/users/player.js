@@ -15,7 +15,7 @@ var Player = class {
     hit(hitter, weapon, bone) {
         var self = this;
         if (self._loggedIn == true) {
-            if ((Date.now() - self._spawnedTimestamp)/1000 > 15) {
+            if ((Date.now() - self._spawnedTimestamp) / 1000 > 15) {
                 if ((self._health > 0) && (self.isDead() == 0)) {
                     let mul = 1;
                     if (bone != undefined) {

@@ -31,27 +31,27 @@ mp.events.add({
         player.alpha = 255;
         player.data.fractionData = JSON.stringify("arbeitslos");
         player.data.businessData = JSON.stringify("arbeitslos");
-		player.data.teamData = JSON.stringify("spieler");
+        player.data.teamData = JSON.stringify("spieler");
 
-        gm.databaseManager.getConnection().query("SELECT username FROM accounts where socialClub = ?", [player.socialClub], function(err, res) {
+        gm.databaseManager.getConnection().query("SELECT username FROM accounts where socialClub = ?", [player.socialClub], function (err, res) {
             if (err) console.log(err);
             if (!res) return;
-            res.forEach(function(username) {
+            res.forEach(function (username) {
                 player.call("startLogin", [username.username]);
             });
         });
 
-        setTimeout(function() {
+        setTimeout(function () {
             try {
                 if (mp.players.exists(player)) {
-                    gm.databaseManager.getConnection().query("SELECT * FROM actions", function(err, res) {
+                    gm.databaseManager.getConnection().query("SELECT * FROM actions", function (err, res) {
                         if (err) console.log(err);
-                        res.forEach(function(action) {
+                        res.forEach(function (action) {
                             if (!res) return;
-                            gm.databaseManager.getConnection().query("SELECT * FROM ped WHERE id = ?", [action.ped], function(err2, res2) {
+                            gm.databaseManager.getConnection().query("SELECT * FROM ped WHERE id = ?", [action.ped], function (err2, res2) {
                                 if (err2) console.log(err2);
                                 if (!res2) return;
-                                res2.forEach(function(ped) {
+                                res2.forEach(function (ped) {
                                     player.call("loadAction", [action.action, action.id, action.fraktionsAktion, ped.posX, ped.posY, ped.posZ]);
                                     player.call("createPed", [ped.hash, ped.posX, ped.posY, ped.posZ, ped.heading, ped.dimension]);
                                 });
@@ -59,18 +59,18 @@ mp.events.add({
                         });
                     });
 
-                    gm.databaseManager.getConnection().query("SELECT * FROM marker", function(err, res) {
+                    gm.databaseManager.getConnection().query("SELECT * FROM marker", function (err, res) {
                         if (err) console.log(err);
                         if (!res) return;
-                        res.forEach(function(marker) {
+                        res.forEach(function (marker) {
                             player.call("loadMarker", [marker.krz, marker.dim1, marker.dim2, marker.pos1X, marker.pos1Y, marker.pos1Z, marker.pos2X, marker.pos2Y, marker.pos2Z, marker.ownerType, marker.ownerName, marker.open]);
                         });
                     });
 
-                    gm.databaseManager.getConnection().query("SELECT spawnerX , spawnerY , spawnerZ FROM garages", function(err, res) {
+                    gm.databaseManager.getConnection().query("SELECT spawnerX , spawnerY , spawnerZ FROM garages", function (err, res) {
                         if (err) console.log(err);
                         if (!res) return;
-                        res.forEach(function(pos) {
+                        res.forEach(function (pos) {
                             var garageMarker = mp.markers.new(1, new mp.Vector3(pos.spawnerX, pos.spawnerY, (pos.spawnerZ - 4)), 4, {
                                 color: [255, 255, 255, 255],
                                 visible: true,
@@ -79,10 +79,10 @@ mp.events.add({
                         });
                     });
 
-                    gm.databaseManager.getConnection().query("SELECT * FROM Blips", function(err, res) {
+                    gm.databaseManager.getConnection().query("SELECT * FROM Blips", function (err, res) {
                         if (err) console.log(err);
                         if (!res.length > 0) return;
-                        res.forEach(function(blip) {
+                        res.forEach(function (blip) {
                             player.call("createBlip", [new mp.Vector3(blip.posX, blip.posY, blip.posZ), blip.sprite, blip.color, blip.title]);
                         });
                     });
@@ -95,7 +95,7 @@ mp.events.add({
 
     "checkUsernamePassword": (player, username, password) => {
 
-        gm.databaseManager.getConnection().query("SELECT id , password, hwid FROM `accounts` WHERE username = '" + username + "' AND isWhitelisted = 'Y' AND isBanned = 'N'", function(err, res) {
+        gm.databaseManager.getConnection().query("SELECT id , password, hwid FROM `accounts` WHERE username = '" + username + "' AND isWhitelisted = 'Y' AND isBanned = 'N'", function (err, res) {
             if (err) console.log("[Auth] Es gab ein Fehler im login System");
 
             if (!res.length > 0) {
@@ -103,7 +103,7 @@ mp.events.add({
                 return;
             }
             if (res[0].hwid == "none") {
-                gm.databaseManager.getConnection().query("UPDATE `accounts` SET hwid = ? WHERE username = ?", [player.serial, username], function(err2, res2) {
+                gm.databaseManager.getConnection().query("UPDATE `accounts` SET hwid = ? WHERE username = ?", [player.serial, username], function (err2, res2) {
                     if (err2) console.log("Error in Update HWID on login!");
                 });
             }
@@ -112,16 +112,16 @@ mp.events.add({
                 return;
             }
 
-            res.forEach(function(account) {
-                bcrypt.compare(password, account.password, function(err2, res2) {
+            res.forEach(function (account) {
+                bcrypt.compare(password, account.password, function (err2, res2) {
                     if (err2) throw err2;
 
                     if (res2) {
-                        gm.databaseManager.getConnection().query("UPDATE `accounts` SET socialClub = ? WHERE username = ?", [player.socialClub, username], function(err4, res4) {
+                        gm.databaseManager.getConnection().query("UPDATE `accounts` SET socialClub = ? WHERE username = ?", [player.socialClub, username], function (err4, res4) {
                             if (err4) console.log("Error in Update socialClub on login!");
                         });
                         player.call("closeLogin");
-                        gm.databaseManager.getConnection().query("SELECT * FROM characters WHERE accountId = '" + account.id + "' AND isWhitelisted = '1'", function(err3, res3) {
+                        gm.databaseManager.getConnection().query("SELECT * FROM characters WHERE accountId = '" + account.id + "' AND isWhitelisted = '1'", function (err3, res3) {
                             if (err3) console.log("[Character Login] Es gab ein Fehler im Character Login!");
 
                             if (!res3.length > 0) {
@@ -131,11 +131,11 @@ mp.events.add({
                             }
                             player.data.accountId = account.id;
                             let charList = [];
-                            res3.forEach(function(chars) {
+                            res3.forEach(function (chars) {
                                 let obj = { "ingamename": chars.ingameName };
                                 charList.push(obj);
                             });
-                            if(mp.players.exists(player)) player.call("client:charchooser:openMenu", [JSON.stringify(charList)]);
+                            if (mp.players.exists(player)) player.call("client:charchooser:openMenu", [JSON.stringify(charList)]);
                         });
                     } else {
                         player.call("wrongLoginDatas");
@@ -148,7 +148,7 @@ mp.events.add({
     "server:charchooser:menuclick": (player, char) => {
         player.alpha = 255;
 
-        gm.databaseManager.getConnection().query("SELECT c.*, f.dateOfBirth FROM characters c LEFT JOIN whitelisting_forms f ON f.characterId = c.id WHERE c.ingameName='" + char + "' AND c.isWhitelisted = 1", function(err, res) {
+        gm.databaseManager.getConnection().query("SELECT c.*, f.dateOfBirth FROM characters c LEFT JOIN whitelisting_forms f ON f.characterId = c.id WHERE c.ingameName='" + char + "' AND c.isWhitelisted = 1", function (err, res) {
             if (err) throw err;
 
             if (!res.length > 0) {
@@ -156,7 +156,7 @@ mp.events.add({
                 return;
             }
 
-            res.forEach(function(character) {
+            res.forEach(function (character) {
                 player.health = character.health;
                 player.armour = character.armor;
                 //player.data.model = "mp_m_freemode_01";
@@ -192,30 +192,30 @@ mp.events.add({
                     player.data.weight = character.weight;
                     player.data.inventory = character.inventory;
 
-                    gm.databaseManager.getConnection().query("UPDATE characters SET isOnline = 'Y', currentOnlineId = " + player.id + " WHERE id = " + character.id, function(errUp, resUp) {
+                    gm.databaseManager.getConnection().query("UPDATE characters SET isOnline = 'Y', currentOnlineId = " + player.id + " WHERE id = " + character.id, function (errUp, resUp) {
                         if (errUp) console.log("Error in update character on login: " + errUp);
                     });
 
                     //Set Team to Player..
                     player.data.teamData = JSON.stringify("spieler");
-                    gm.databaseManager.getConnection().query("SELECT f.teamName, f.teamID, r.id AS teamRankID, r.teamRankName, r.teamRank FROM teamusers u LEFT JOIN teamranks r ON r.id = u.teamRankID LEFT JOIN team f ON f.teamID = u.teamID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.teamName, f.teamID, r.id AS teamRankID, r.teamRankName, r.teamRank FROM teamusers u LEFT JOIN teamranks r ON r.id = u.teamRankID LEFT JOIN team f ON f.teamID = u.teamID WHERE u.playerCharId = ?", [player.data.internalId], function (err2, res2) {
                         if (err2) console.log("Error on Set Team");
 
                         if (res2.length > 0) {
-                            res2.forEach(function(team) {
+                            res2.forEach(function (team) {
                                 player.data.teamData = JSON.stringify(team);
                                 //player.data.fractionClothes = JSON.stringify(fraction.clothes);
                             });
                         }
                     });
-					
+
                     //Set Fraction to Player..
                     player.data.fractionData = JSON.stringify("arbeitslos");
-                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy, u.clothes FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.fractionName, f.fractionID, r.id AS fractionRankID, r.fractionRankName, r.fractionRank, r.canBill, r.canInvite, r.payCheck, u.playerFractionDuty, u.playerFractionCanBuy, u.clothes FROM fractionusers u LEFT JOIN fractionranks r ON r.id = u.fractionRankID LEFT JOIN fractions f ON f.fractionID = u.fractionID WHERE u.playerCharId = ?", [player.data.internalId], function (err2, res2) {
                         if (err2) console.log("Error on Set Fraction");
 
                         if (res2.length > 0) {
-                            res2.forEach(function(fraction) {
+                            res2.forEach(function (fraction) {
                                 player.data.fractionData = JSON.stringify(fraction);
                                 player.data.fractionClothes = JSON.stringify(fraction.clothes);
                             });
@@ -224,17 +224,17 @@ mp.events.add({
 
                     //Set Business to Player
                     player.data.businessData = JSON.stringify("arbeitslos");
-                    gm.databaseManager.getConnection().query("SELECT f.businessName, f.businessID, r.id AS businessRankID, r.businessRankName, r.businessRank, r.canBill, r.canInvite, r.payCheck, u.playerBusinessDuty FROM businessusers u LEFT JOIN businessranks r ON r.id = u.businessRankID LEFT JOIN business f ON f.businessID = u.businessID WHERE u.playerCharId = ?", [player.data.internalId], function(err2, res2) {
+                    gm.databaseManager.getConnection().query("SELECT f.businessName, f.businessID, r.id AS businessRankID, r.businessRankName, r.businessRank, r.canBill, r.canInvite, r.payCheck, u.playerBusinessDuty FROM businessusers u LEFT JOIN businessranks r ON r.id = u.businessRankID LEFT JOIN business f ON f.businessID = u.businessID WHERE u.playerCharId = ?", [player.data.internalId], function (err2, res2) {
                         if (err2) console.log("Error on Set Business");
 
                         if (res2.length > 0) {
-                            res2.forEach(function(fraction) {
+                            res2.forEach(function (fraction) {
                                 player.data.businessData = JSON.stringify(fraction);
                             });
                         }
                     });
 
-                    player.colorForOverlayIdx = function(index) {
+                    player.colorForOverlayIdx = function (index) {
                         let color;
 
                         switch (index) {
@@ -266,13 +266,13 @@ mp.events.add({
                     };
 
                     if (player.isPet !== 1) {
-                        gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+                        gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
                             if (err2) console.log("Error in setModel + Clothes on Login");
 
 
                             if (res2.length > 0) {
                                 try {
-                                    res2.forEach(function(modelData) {
+                                    res2.forEach(function (modelData) {
                                         var model = JSON.parse(modelData.data);
                                         var appearance = modelData.appearance;
 
@@ -289,14 +289,14 @@ mp.events.add({
                                         var clothes = appearance.clothes;
                                         var props = appearance.props;
                                         var i = 0;
-                                        clothes.forEach(function(component) {
+                                        clothes.forEach(function (component) {
                                             if (component !== null) {
                                                 player.setClothes(parseInt(i), parseInt(component.drawable), parseInt(component.texture), parseInt(component.palette));
                                             }
                                             i++;
                                         });
                                         i = 0;
-                                        props.forEach(function(component) {
+                                        props.forEach(function (component) {
                                             if (component !== null) {
                                                 player.setProp(parseInt(i), parseInt(component.drawable), parseInt(component.texture));
                                             }
@@ -311,7 +311,7 @@ mp.events.add({
                                         //if(player && pos) player.call("client::login::camerafahrt", [pos]);
 
                                         var i = 0;
-                                        model["Features"].forEach(function(featureData) {
+                                        model["Features"].forEach(function (featureData) {
                                             player.setFaceFeature(i, featureData);
                                             i = i + 1;
                                         });
@@ -323,7 +323,7 @@ mp.events.add({
                                         player.eyeColor = model['Hair']['5'];
 
                                         var i2 = 0;
-                                        model["Appearance"].forEach(function(featureData) {
+                                        model["Appearance"].forEach(function (featureData) {
                                             switch (i2) {
                                                 case 1:
                                                     color = model['Hair'][4];
@@ -378,11 +378,11 @@ mp.events.add("initEinreise", (player) => {
     mp.events.call("server:ClothesMenu:save", player);
     try {
         if (mp.players.exists(player)) {
-            gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+            gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
                 if (err2) console.log("Error in unnötiges nötiges Camera Destroy Event Clothes + Model");
 
                 if (res2.length > 0) {
-                    res2.forEach(function(modelData) {
+                    res2.forEach(function (modelData) {
                         var model = JSON.parse(modelData.data);
                         var appearance = modelData.appearance;
 
@@ -395,7 +395,7 @@ mp.events.add("initEinreise", (player) => {
                         mp.events.call("server:ClothesMenu:load", player, appearance);
 
                         var i = 0;
-                        model["Features"].forEach(function(featureData) {
+                        model["Features"].forEach(function (featureData) {
                             player.setFaceFeature(i, featureData);
                             i = i + 1;
                         });
@@ -406,7 +406,7 @@ mp.events.add("initEinreise", (player) => {
                         player.eyeColor = model['Hair']['5'];
 
                         var i2 = 0;
-                        model["Appearance"].forEach(function(featureData) {
+                        model["Appearance"].forEach(function (featureData) {
                             switch (i2) {
                                 case 1:
                                     color = model['Hair'][4];
@@ -447,11 +447,11 @@ mp.events.add("initEinreise", (player) => {
 
 mp.events.add("unnötigesCameraDestroyEvent", (player) => {
     if (player.isPet !== 1) {
-        gm.databaseManager.getConnection().query("SELECT appearance, data, feature FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
+        gm.databaseManager.getConnection().query("SELECT appearance, data, feature FROM charactermodel WHERE internalId = ?", [player.data.internalId], function (err2, res2) {
             if (err2) console.log("Error in unnötiges nötiges Camera Destroy Event Clothes + Model");
 
             if (res2.length > 0) {
-                res2.forEach(function(modelData) {
+                res2.forEach(function (modelData) {
                     var model = JSON.parse(modelData.data);
                     var appearance = modelData.appearance;
                     var currentTattoos = modelData.feature;
@@ -459,7 +459,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
                     currentTattoos = JSON.parse(currentTattoos);
 
                     if (currentTattoos !== null) {
-                        currentTattoos.forEach(function(tattoo) {
+                        currentTattoos.forEach(function (tattoo) {
                             player.setDecoration(parseInt(tattoo.collection), parseInt(tattoo.overlay));
                         });
                     }
@@ -473,7 +473,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
                     mp.events.call("server:ClothesMenu:load", player, appearance);
 
                     var i = 0;
-                    model["Features"].forEach(function(featureData) {
+                    model["Features"].forEach(function (featureData) {
                         player.setFaceFeature(i, featureData);
                         i = i + 1;
                     });
@@ -484,7 +484,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
                     player.eyeColor = model['Hair']['5'];
 
                     var i2 = 0;
-                    model["Appearance"].forEach(function(featureData) {
+                    model["Appearance"].forEach(function (featureData) {
                         switch (i2) {
                             case 1:
                                 color = model['Hair'][4];
@@ -514,17 +514,17 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
         player.model = mp.joaat(player.petHash);
     }
 
-    gm.databaseManager.getConnection().query("SELECT * FROM vehiclekeys WHERE keyOwner = ?", [player.data.internalId], function(err5, res5) {
+    gm.databaseManager.getConnection().query("SELECT * FROM vehiclekeys WHERE keyOwner = ?", [player.data.internalId], function (err5, res5) {
         if (err5) console.log("Error in Select Vehicle Keys on Login");
         let vehKeysList = [];
-        res5.forEach(function(vehKeys) {
+        res5.forEach(function (vehKeys) {
             let obj = { "vehid": parseInt(vehKeys.vehID), "active": String(vehKeys.isActive) };
             vehKeysList.push(obj);
         });
         vehKeysList = JSON.stringify(vehKeysList);
         player.setVariable("currentKeys", vehKeysList);
     });
-    
+
     player.call("loginFinish", [player.data.money]);
     player.call("ConnectTeamspeak", [true]);
     player.setVariable("VOICE_RANGE", "normal");
@@ -534,11 +534,10 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
     mp.world.requestIpl("apa_v_mp_h_08_a");
     mp.world.requestIpl("apa_v_mp_h_01_c");
 
-    gm.databaseManager.getConnection().query("SELECT health FROM `characters` WHERE id = ?", [player.data.internalId], function(err, res) {
+    gm.databaseManager.getConnection().query("SELECT health FROM `characters` WHERE id = ?", [player.data.internalId], function (err, res) {
         if (err) console.log("Error in Update Char join Health: " + err);
 
-        res.forEach(function(health) {
-            mp.events.call("server:inventory:reWeaponize", player);
+        res.forEach(function (health) {
 
             if (parseInt(health.health) == 1 || parseInt(health.health) == 0) {
                 //player.spawn(player.position);
