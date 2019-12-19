@@ -33,7 +33,6 @@ mp.events.add({
         player.data.businessData = JSON.stringify("arbeitslos");
 		player.data.teamData = JSON.stringify("spieler");
 
-
         gm.databaseManager.getConnection().query("SELECT username FROM accounts where socialClub = ?", [player.socialClub], function(err, res) {
             if (err) console.log(err);
             if (!res) return;
@@ -41,6 +40,7 @@ mp.events.add({
                 player.call("startLogin", [username.username]);
             });
         });
+
         setTimeout(function() {
             try {
                 if (mp.players.exists(player)) {
@@ -65,7 +65,6 @@ mp.events.add({
                         res.forEach(function(marker) {
                             player.call("loadMarker", [marker.krz, marker.dim1, marker.dim2, marker.pos1X, marker.pos1Y, marker.pos1Z, marker.pos2X, marker.pos2Y, marker.pos2Z, marker.ownerType, marker.ownerName, marker.open]);
                         });
-
                     });
 
                     gm.databaseManager.getConnection().query("SELECT spawnerX , spawnerY , spawnerZ FROM garages", function(err, res) {
@@ -95,8 +94,9 @@ mp.events.add({
     },
 
     "checkUsernamePassword": (player, username, password) => {
-        gm.databaseManager.getConnection().query("SELECT id , password, hwid FROM `accounts` WHERE username = '" + username + "' AND isAlpha = 'Y' AND isBanned = 'N'", function(err, res) {
-            if (err) throw err;
+
+        gm.databaseManager.getConnection().query("SELECT id , password, hwid FROM `accounts` WHERE username = '" + username + "' AND isWhitelisted = 'Y' AND isBanned = 'N'", function(err, res) {
+            if (err) console.log("[Auth] Es gab ein Fehler im login System");
 
             if (!res.length > 0) {
                 player.call("wrongLoginDatas");
@@ -121,8 +121,8 @@ mp.events.add({
                             if (err4) console.log("Error in Update socialClub on login!");
                         });
                         player.call("closeLogin");
-                        gm.databaseManager.getConnection().query("SELECT * FROM characters WHERE accountId = '" + account.id + "' AND isWhitelisted='1'", function(err3, res3) {
-                            if (err3) throw err3;
+                        gm.databaseManager.getConnection().query("SELECT * FROM characters WHERE accountId = '" + account.id + "' AND isWhitelisted = '1'", function(err3, res3) {
+                            if (err3) console.log("[Character Login] Es gab ein Fehler im Character Login!");
 
                             if (!res3.length > 0) {
                                 player.notify("~r~Du hast keine gewhitelisteten Charactere!");
@@ -264,6 +264,7 @@ mp.events.add({
 
                         return color;
                     };
+
                     if (player.isPet !== 1) {
                         gm.databaseManager.getConnection().query("SELECT appearance, data FROM charactermodel WHERE internalId = ?", [player.data.internalId], function(err2, res2) {
                             if (err2) console.log("Error in setModel + Clothes on Login");
@@ -309,7 +310,6 @@ mp.events.add({
                                         if (player && pos) player.spawn(pos);
                                         //if(player && pos) player.call("client::login::camerafahrt", [pos]);
 
-
                                         var i = 0;
                                         model["Features"].forEach(function(featureData) {
                                             player.setFaceFeature(i, featureData);
@@ -328,28 +328,23 @@ mp.events.add({
                                                 case 1:
                                                     color = model['Hair'][4];
                                                     break;
-
                                                 case 2:
                                                     color = model['Hair'][3];
                                                     break;
-
                                                 case 5:
                                                     color = model['Hair'][6];
                                                     break;
-
                                                 case 8:
                                                     color = model['Hair'][7];
                                                     break;
-
                                                 case 10:
                                                     color = model['Hair'][8];
                                                     break;
-
                                                 default:
                                                     color = 0;
                                             }
                                             player.setHeadOverlay(i2, [model['Appearance'][i2].Value, model['Appearance'][i2].Opacity, color, 0]);
-                                            i2 = i2 + 1; // TODO: Finde raus warum es da knallt!
+                                            i2 = i2 + 1;
                                         });
                                     });
                                 } catch (e) {
@@ -373,7 +368,6 @@ mp.events.add({
                     player.setVariable("state", "INGAME");
                     player.call("client:TS-VoiceChat:removeFromRadio");
                 }
-
             });
         });
     },
@@ -407,7 +401,6 @@ mp.events.add("initEinreise", (player) => {
                         });
 
                         player.setHeadBlend(model["Parents"]["Mother"], model["Parents"]["Father"], 0, model["Parents"]["Mother"], model["Parents"]["Father"], 0, model["Parents"]["Similarity"], model["Parents"]["SkinSimilarity"], 0)
-
                         player.setClothes(2, model['Hair']['0'], 0, 2);
                         player.setHairColor(model['Hair']['1'], model['Hair']['2']);
                         player.eyeColor = model['Hair']['5'];
@@ -418,23 +411,18 @@ mp.events.add("initEinreise", (player) => {
                                 case 1:
                                     color = model['Hair'][4];
                                     break;
-
                                 case 2:
                                     color = model['Hair'][3];
                                     break;
-
                                 case 5:
                                     color = model['Hair'][6];
                                     break;
-
                                 case 8:
                                     color = model['Hair'][7];
                                     break;
-
                                 case 10:
                                     color = model['Hair'][8];
                                     break;
-
                                 default:
                                     color = 0;
                             }
@@ -444,6 +432,7 @@ mp.events.add("initEinreise", (player) => {
                     });
                 }
             });
+
             player.call("loginFinish", [player.data.money]);
             player.call("ConnectTeamspeak", [true]);
             player.setVariable("VOICE_RANGE", "normal");
@@ -490,7 +479,6 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
                     });
 
                     player.setHeadBlend(model["Parents"]["Mother"], model["Parents"]["Father"], 0, model["Parents"]["Mother"], model["Parents"]["Father"], 0, model["Parents"]["Similarity"], model["Parents"]["SkinSimilarity"], 0)
-
                     player.setClothes(2, model['Hair']['0'], 0, 2);
                     player.setHairColor(model['Hair']['1'], model['Hair']['2']);
                     player.eyeColor = model['Hair']['5'];
@@ -501,28 +489,23 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
                             case 1:
                                 color = model['Hair'][4];
                                 break;
-
                             case 2:
                                 color = model['Hair'][3];
                                 break;
-
                             case 5:
                                 color = model['Hair'][6];
                                 break;
-
                             case 8:
                                 color = model['Hair'][7];
                                 break;
-
                             case 10:
                                 color = model['Hair'][8];
                                 break;
-
                             default:
                                 color = 0;
                         }
                         player.setHeadOverlay(i2, [model['Appearance'][i2].Value, model['Appearance'][i2].Opacity, color, 0]);
-                        i2 = i2 + 1; // TODO: Finde raus warum es da knallt!
+                        i2 = i2 + 1;
                     });
                 });
             }
@@ -530,6 +513,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
     } else {
         player.model = mp.joaat(player.petHash);
     }
+
     gm.databaseManager.getConnection().query("SELECT * FROM vehiclekeys WHERE keyOwner = ?", [player.data.internalId], function(err5, res5) {
         if (err5) console.log("Error in Select Vehicle Keys on Login");
         let vehKeysList = [];
@@ -540,6 +524,7 @@ mp.events.add("unnötigesCameraDestroyEvent", (player) => {
         vehKeysList = JSON.stringify(vehKeysList);
         player.setVariable("currentKeys", vehKeysList);
     });
+    
     player.call("loginFinish", [player.data.money]);
     player.call("ConnectTeamspeak", [true]);
     player.setVariable("VOICE_RANGE", "normal");

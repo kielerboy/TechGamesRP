@@ -2,9 +2,9 @@
 
 ## Introduction
 
-TechGamesRP is a *RageMP* Script based mostly in JS.
+TechGamesRP is a _RageMP_ Script based mostly in JS.
 
-It is derived from *TechGames* and is based on the code of that project with extensive changes over time to optimize,
+It is derived from _TechGames_ and is based on the code of that project with extensive changes over time to optimize,
 improve and cleanup the codebase at the same time as improving the in-game mechanics and functionality.
 
 It is completely open source; community involvement is highly encouraged.
@@ -109,10 +109,9 @@ JS fixes are submitted as pull requests via Github. For more information on how 
 properly submit a pull request, read the [how-to: maintain a remote fork](#).
 For SQL only fixes, open a ticket; if a bug report exists for the bug, post on an existing ticket.
 
-
 ## Copyright
 
-License: MIT
+License: LGPL - 2.1
 
 Read file [LICENSE](LICENSE).
 
@@ -122,7 +121,7 @@ Read file [THANKS](THANKS).
 
 ## Links
 
-* [Website](#)
-* [Wiki](#)
-* [Forums](#)
-* [Discord](https://discord.gg/VzJnZtx)
+- [Website](#)
+- [Wiki](#)
+- [Forums](#)
+- [Discord](https://discord.gg/VzJnZtx)

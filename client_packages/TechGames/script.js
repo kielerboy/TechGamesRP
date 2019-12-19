@@ -61,7 +61,7 @@ require("TechGames/nativeui");
 require("TechGames/ragelife");
 require("TechGames/Doors");
 require("TechGames/Animations");
-require("TechGames/TS-VoiceChat");
+//require("TechGames/TS-VoiceChat");
 require("TechGames/VehSync");
 require("TechGames/GetPos");
 require("TechGames/Fuelstation");
