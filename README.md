@@ -15,6 +15,12 @@ make pull requests to our [Github repository](https://github.com/Setraxis/TechGa
 For further information on the TechGamesRP project, please visit our project
 website at [Later](#).
 
+## Requirements
+
+- MySQL 8.0.x Server
+- NodeJS
+- NPM
+
 ## Features
 
 Das Script ist Roleplay basierend aufgebaut, für jegliche Vorstellungen bezüglich Konzepting, Business, Fraktion etc. liegt eine Grundlage vor, die schnell erweitert werden kann.
