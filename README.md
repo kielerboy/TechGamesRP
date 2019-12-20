@@ -21,6 +21,9 @@ website at [Later](#).
 - NodeJS
 - NPM
 
+## Beschwerdestelle
+
+Wenn du eine Beschwerde hast, wende dich bitte an folgende Person : https://rage.mp/profile/16781-commanderdonkey/ Dieser hat mit SnillocTV alles zusammen geklaut!
 ## Features
 
 Das Script ist Roleplay basierend aufgebaut, für jegliche Vorstellungen bezüglich Konzepting, Business, Fraktion etc. liegt eine Grundlage vor, die schnell erweitert werden kann.

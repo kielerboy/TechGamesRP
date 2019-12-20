@@ -20,7 +20,7 @@ mp.events.add("render", () => {
     let maxHealth = player.vehicle.getMaxHealth();
     let healthPercent = Math.floor((health / maxHealth) * 100);
     let gas = player.vehicle.getVariable("Tank");
-    kmS = player.vehicle.getVariable("Kilometer");
+    
 
     var velo = parseInt(vel, 10);
 
